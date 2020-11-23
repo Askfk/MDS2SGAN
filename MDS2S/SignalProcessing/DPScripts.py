@@ -188,10 +188,10 @@ def prepareTrainData(inputs, label):
         lamb_data = scio.loadmat(os.path.join(ROOT_DIR, file_name))['exportData'][0][0][0][0]
         if res is None:
             res = lamb_data[: config.SIGNAL_FREQ * config.SIGNAL_PERIOD].\
-                reshape([config.SIGNAL_FREQ, config.SIGNAL_PERIOD, 1])
+                reshape([config.SIGNAL_FREQ, config.SIGNAL_PERIOD, 1]) * config.AMPLIFIER
         else:
             temp = lamb_data[: config.SIGNAL_FREQ * config.SIGNAL_PERIOD].\
-                reshape([config.SIGNAL_FREQ, config.SIGNAL_PERIOD, 1])
+                reshape([config.SIGNAL_FREQ, config.SIGNAL_PERIOD, 1]) * config.AMPLIFIER
             res = np.concatenate([res, temp], axis=2)
     return res, label
 

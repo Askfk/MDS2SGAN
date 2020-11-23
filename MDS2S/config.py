@@ -6,6 +6,8 @@ class Config(object):
     SIGNAL_FREQ = 96
     SIGNAL_PERIOD = 96
 
+    AMPLIFIER = 1e2
+
     # The num of status of welding lines, one-hot encode
     NUM_CLASSES = 6
 
