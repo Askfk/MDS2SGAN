@@ -5,6 +5,9 @@ from .ymScripts.ymLayers import BatchNorm, FixedDropout
 from .ymScripts.ymSeq2seq import get_encoders_graph, get_decoders_graph
 
 
+tf.config.experimental_run_functions_eagerly(True)
+
+
 class MDS(tf.keras.Model):
     """Mode Decompose Seq2seq Model
     Seq2seq architecture with encoder and decoder as generator"""
