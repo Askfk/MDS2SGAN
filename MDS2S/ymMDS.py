@@ -20,15 +20,17 @@ class MDS(tf.keras.Model):
         self.decoder = get_decoders_graph(config, None)
 
     def call(self, inputs, training=False):
-        [o1, o2, _, o4, _] = self.encoder(inputs, training)
+        [o1, o2, o3, _, _] = self.encoder(inputs, training)
         # TODO: find out whether need to set a middle layer between encoder and decoder. The task
         #  of middle layer is to combine the pyramid feature maps
         o1 = tf.reshape(o1, [-1, o1.shape[1] ** 2, o1.shape[3]], name=self.prefix + 'o1_reshape')
         o2 = tf.reshape(o2, [-1, o2.shape[1] ** 2, o2.shape[3]], name=self.prefix + 'o2_reshape')
-        o4 = tf.reshape(o4, [-1, o4.shape[1] ** 2, o4.shape[3]], name=self.prefix + 'o3_reshape')
-        x = tf.concat([o1, o2, o2, o4], axis=1, name=self.prefix + 'o_concat')
-        x = tf.reshape(x, [-1, self.config.DECODER_INPUT_SHAPE[1], self.config.DECODER_INPUT_SHAPE[1], x.shape[2]],
-                       name=self.prefix + 'x_reshape')
+        o3 = tf.reshape(o3, [-1, o3.shape[1] ** 2, o3.shape[3]], name=self.prefix + 'o3_reshape')
+
+        x = tf.concat([o1, o2, o2, o3], axis=1, name=self.prefix + 'o_concat')
+        # x = tf.reshape(x, [-1, self.config.DECODER_INPUT_SHAPE[1], self.config.DECODER_INPUT_SHAPE[1], x.shape[2]],
+        #                name=self.prefix + 'x_reshape')
+        x.set_shape([-1, self.config.DECODER_INPUT_SHAPE[1], self.config.DECODER_INPUT_SHAPE[1], x.shape[2]])
         x = self.decoder(x, training)
 
         return x
@@ -67,7 +69,7 @@ class DCM(tf.keras.Model):
         self.final_dense = tf.keras.layers.Dense(self.config.NUM_CLASSES)
         self.softmax = tf.keras.layers.Activation('softmax')
 
-    def call(self, inputs, training):
+    def call(self, inputs, training=False):
         """The shape of inputs  is [batch, config.SIGNAL_FREQ, config.SIGNAL_PERIOD, config.NUM_STATUS]"""
 
         # output: [batch, SIGNAL_FREQ / 2, SIGNAL_PERIOD / 2, 16]
@@ -110,7 +112,7 @@ if __name__ == '__main__':
 
     # inp = tf.convert_to_tensor(np.random.random([3, 128, 128, 3]), tf.float32)
     # out = mds(inp, False)
-    inp = tf.keras.layers.Input([128, 128, 3])
+    inp = tf.keras.layers.Input([96, 96, 3])
     mds_out = mds(inp, False)
     dcm_out = dcm(mds_out, False)
     model = tf.keras.Model(inp, dcm_out)
