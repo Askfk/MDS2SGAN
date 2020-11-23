@@ -11,7 +11,7 @@ original MATLAB code: https://www.mathworks.com/matlabcentral/fileexchange/44765
 # from __future__ import division# if python 2
 import numpy as np
 import matplotlib.pyplot as plt
-from VMD import VMD
+from .VMD import VMD
 
 # Time Domain 0 to T
 T = 1000

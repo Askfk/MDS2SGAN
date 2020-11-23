@@ -6,9 +6,9 @@ import itertools
 
 from ..config import Config as config
 
-from EDA import autoEDA
-from EMD import autoEMD
-from VMD import autoVMD
+from .EDA import autoEDA
+from .EMD import autoEMD
+from .VMD import autoVMD
 
 
 ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/1120'
