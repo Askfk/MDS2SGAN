@@ -53,17 +53,18 @@ class Decoder(tf.keras.Model):
 
         # TODO: should reconsider the activations.
 
-        # out: [batch, 32, 32, 256]
-        self.in_layer = tf.keras.layers.Conv2D(256, (5, 5), activation='relu', kernel_regularizer='l1_l2')
-        # out: [batch, 32, 32, 128]
+        # out: [batch, 24, 24, 256]
+        self.in_layer = tf.keras.layers.Conv2D(self.config.TOP_DOWN_PYRAMID_SIZE, (7, 7), activation='relu',
+                                               kernel_regularizer='l1_l2')
+        # out: [batch, 24, 24, 128]
         self.deconv1 = tf.keras.layers.Conv2DTranspose(128, (5, 5), (1, 1), padding='same',
                                                        activation='relu', kernel_regularizer='l1_l2')
         self.bn1 = BatchNorm()
-        # out: [batch, 64, 64, 32]
+        # out: [batch, 48, 48, 32]
         self.deconv2 = tf.keras.layers.Conv2DTranspose(64, (5, 5), (2, 2), padding='same', activation='relu',
                                                        kernel_regularizer='l1_l2')
         self.bn2 = BatchNorm()
-        # out: [batch, 128, 128, config.NUM_STATUS]
+        # out: [batch, 96, 96, config.NUM_STATUS]
         self.deconv3 = tf.keras.layers.Conv2DTranspose(config.NUM_STATUS, (5, 5), (2, 2), padding='same',
                                                        use_bias=False, activation='tanh')
 

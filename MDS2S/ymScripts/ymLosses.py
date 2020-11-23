@@ -5,7 +5,9 @@ import tensorflow.keras.backend as K
 
 def categorical_focal_loss(gamma=2.0, alpha=0.25):
     """
-    Implementation of Focal Loss from the paper in multiclass classification
+    Implementation of Focal Loss from the paper in multi-class classification,
+    always used when data distribution is insufficient.
+
     Formula:
         loss = -alpha*((1-p)^gamma)*log(p)
     Parameters:

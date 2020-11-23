@@ -26,8 +26,8 @@ class MDS(tf.keras.Model):
         o1 = tf.reshape(o1, [-1, o1.shape[1] ** 2, o1.shape[3]], name=self.prefix + 'o1_reshape')
         o2 = tf.reshape(o2, [-1, o2.shape[1] ** 2, o2.shape[3]], name=self.prefix + 'o2_reshape')
         o4 = tf.reshape(o4, [-1, o4.shape[1] ** 2, o4.shape[3]], name=self.prefix + 'o3_reshape')
-        x = tf.concat([o1, o2, o4], axis=1, name=self.prefix + 'o_concat')
-        x = tf.reshape(x, [-1, int(x.shape[1] ** 0.5), int(x.shape[1] ** 0.5), x.shape[2]],
+        x = tf.concat([o1, o2, o2, o4], axis=1, name=self.prefix + 'o_concat')
+        x = tf.reshape(x, [-1, self.config.DECODER_INPUT_SHAPE[1], self.config.DECODER_INPUT_SHAPE[1], x.shape[2]],
                        name=self.prefix + 'x_reshape')
         x = self.decoder(x, training)
 

@@ -32,20 +32,21 @@ def build_backbone_net_graph(architecture, config=None):
 
 
 if __name__ == '__main__':
-    pass
-    # from config import Config
-    # import tensorflow as tf
-    # import numpy as np
-    # config = Config()
-    # model = build_backbone_net_graph('efficientnet-b3', config)
-    # input_tensor = np.random.random([1, 128, 128, 3])
-    # input_tensor = tf.convert_to_tensor(input_tensor, tf.float32)
-    # b = model(input_tensor, False)
-    # [o1, o2, _, o4, _] = b
-    # o1 = tf.reshape(o1, [o1.shape[0], o1.shape[1] ** 2, o1.shape[3]])
-    # o2 = tf.reshape(o2, [o2.shape[0], o2.shape[1] ** 2, o2.shape[3]])
-    # o4 = tf.reshape(o4, [o4.shape[0], o4.shape[1] ** 2, o4.shape[3]])
-    # o = tf.concat([o1, o2, o4], axis=1)
-    # o = tf.reshape(o, [o.shape[0], int(o.shape[1]**0.5), int(o.shape[1]**0.5), o.shape[2]])
-    # print(o.shape)
+    from config import Config
+    import tensorflow as tf
+    import numpy as np
+    config = Config()
+    model = build_backbone_net_graph('efficientnet-b3', config)
+    input_tensor = np.random.random([1, 96, 96, 3])
+    input_tensor = tf.convert_to_tensor(input_tensor, tf.float32)
+    b = model(input_tensor, False)
+    for o in b:
+        print(o.shape)
+    [o1, o2, _, o4, _] = b
+    o1 = tf.reshape(o1, [o1.shape[0], o1.shape[1] ** 2, o1.shape[3]])
+    o2 = tf.reshape(o2, [o2.shape[0], o2.shape[1] ** 2, o2.shape[3]])
+    o4 = tf.reshape(o4, [o4.shape[0], o4.shape[1] ** 2, o4.shape[3]])
+    o = tf.concat([o1, o2, o4], axis=1)
+    o = tf.reshape(o, [o.shape[0], int(o.shape[1]**0.5), int(o.shape[1]**0.5), o.shape[2]])
+    print(o.shape)
 

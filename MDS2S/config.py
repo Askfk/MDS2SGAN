@@ -10,7 +10,7 @@ class Config(object):
     NUM_CLASSES = 6
 
     # The num of mode status of lamb wave
-    NUM_MODAS = 4
+    NUM_MODALS = 4
 
     NAME = None
 
@@ -104,10 +104,18 @@ class Config(object):
         # TOTAL_BLOCK_NUMS: for drop rate calculation.
         self.TOTAL_BLOCK_NUMS = sum(block_args.num_repeat for block_args in self.DEFAULT_BLOCKS_ARGS)
 
-        self.INPUT_SIZE = [self.SIGNAL_FREQ, self.SIGNAL_PERIOD, self.NUM_STATUS]
+        # The input shape of Discriminator
+        self.INPUT_SIZE = [self.SIGNAL_FREQ, self.SIGNAL_PERIOD, self.NUM_MODALS]
+
+        self.computeDecoderInputResolution()
 
     def calculateDropRate(self, block_args):
         pass
+
+    def computeDecoderInputResolution(self):
+
+        resolution = 10 * self.SIGNAL_FREQ // 32
+        self.DECODER_INPUT_SHAPE = [None, resolution, resolution, self.TOP_DOWN_PYRAMID_SIZE]
 
     def to_dict(self):
         return {a: getattr(self, a)
