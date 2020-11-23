@@ -1,7 +1,7 @@
 import tensorflow as tf
 
-import ymLayers
-from config import Config
+from . import ymLayers
+from ..config import Config
 
 
 class MBConv(tf.keras.layers.Layer):

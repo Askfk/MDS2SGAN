@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import itertools
 
-from config import Config as config
+from ..config import Config as config
 
 from EDA import autoEDA
 from EMD import autoEMD

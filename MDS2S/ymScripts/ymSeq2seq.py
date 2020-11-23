@@ -1,8 +1,8 @@
 import tensorflow as tf
 
-from ymScripts.ymLayers import BatchNorm, FixedDropout
-from ymScripts.ymActivations import swish, relu
-from BackBones.backbone import build_backbone_net_graph
+from .ymLayers import BatchNorm, FixedDropout
+from .ymActivations import swish, relu
+from ..BackBones.backbone import build_backbone_net_graph
 
 
 class Encoder(tf.keras.Model):

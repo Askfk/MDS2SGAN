@@ -1,8 +1,8 @@
 import tensorflow as tf
 
-from ymScripts.ymActivations import swish, leakyRelu
-from ymScripts.ymLayers import BatchNorm, FixedDropout
-from ymScripts.ymSeq2seq import get_encoders_graph, get_decoders_graph
+from .ymScripts.ymActivations import swish, leakyRelu
+from .ymScripts.ymLayers import BatchNorm, FixedDropout
+from .ymScripts.ymSeq2seq import get_encoders_graph, get_decoders_graph
 
 
 class MDS(tf.keras.Model):
