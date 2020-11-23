@@ -3,6 +3,7 @@ import scipy.io as scio
 import matplotlib.pyplot as plt
 import numpy as np
 import itertools
+import tensorflow as tf
 
 from ..config import Config as config
 
