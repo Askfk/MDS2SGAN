@@ -62,7 +62,8 @@ class DilatedConv2d(tf.keras.layers.Layer):
     def call(self, inputs):
         """The size of input must be [N, H, W, C]"""
         x = inputs
-        out = tf.nn.conv2d(x, self.kernel, strides=self.strides, padding=self.padding, dilations=self.dilations)
+        out = tf.nn.dilation2d(x, self.kernel, strides=[1, 1, 1, 1], padding=self.padding, dilations=self.dilations,
+                               data_format="NHWC")
         out = tf.nn.relu(out)
         return out
 

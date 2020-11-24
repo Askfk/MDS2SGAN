@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="" />
+    <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/MDS2S.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MDS2S.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ymMDS.py" beforeDir="false" afterPath="$PROJECT_DIR$/ymMDS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ymScripts/ymLayers.py" beforeDir="false" afterPath="$PROJECT_DIR$/ymScripts/ymLayers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ymScripts/ymSeq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/ymScripts/ymSeq2seq.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +53,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ymMDS">
+  <component name="RunManager" selected="Python.ymSeq2seq">
     <configuration name="backbone" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MDS2S" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -159,10 +166,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ymSeq2seq" />
         <item itemvalue="Python.ymMDS" />
         <item itemvalue="Python.backbone" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.ymSeq2seq" />
         <item itemvalue="Python.t" />
       </list>
     </recent_temporary>
@@ -189,7 +196,8 @@
       <workItem from="1604577752345" duration="6574000" />
       <workItem from="1604762069083" duration="62469000" />
       <workItem from="1606029842960" duration="10051000" />
-      <workItem from="1606108764146" duration="14563000" />
+      <workItem from="1606108764146" duration="15286000" />
+      <workItem from="1606212084368" duration="3156000" />
     </task>
     <servers />
   </component>
@@ -201,7 +209,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -216,7 +226,7 @@
     <SUITE FILE_PATH="coverage/MDS2S$ymLosses.coverage" NAME="ymLosses Coverage Results" MODIFIED="1604899812742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
     <SUITE FILE_PATH="coverage/MDS2S$F.coverage" NAME="F Coverage Results" MODIFIED="1605330557497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalPreprocessing" />
     <SUITE FILE_PATH="coverage/MDS2S$backbone.coverage" NAME="backbone Coverage Results" MODIFIED="1606112155522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackBones" />
-    <SUITE FILE_PATH="coverage/MDS2S$ymSeq2seq.coverage" NAME="ymSeq2seq Coverage Results" MODIFIED="1605506041269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
+    <SUITE FILE_PATH="coverage/MDS2S$ymSeq2seq.coverage" NAME="ymSeq2seq Coverage Results" MODIFIED="1606227045760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
     <SUITE FILE_PATH="coverage/MDS2S$test.coverage" NAME="test Coverage Results" MODIFIED="1606055905045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1605017802750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

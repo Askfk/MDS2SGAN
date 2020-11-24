@@ -16,7 +16,7 @@ class Config(object):
 
     NAME = None
 
-    ENCODER_BACKBONE = 'efficientnet-b3'
+    ENCODER_BACKBONE = 'custom'
     DECODER_BACKBONE = 'custom'
 
     GPU_COUNT = 1

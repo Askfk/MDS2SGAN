@@ -1,24 +1,32 @@
 import tensorflow as tf
 
-from .ymLayers import BatchNorm, FixedDropout
-from .ymActivations import swish, relu
-from ..BackBones.backbone import build_backbone_net_graph
+from ymLayers import BatchNorm, FixedDropout, DilatedConv2d
+from ymActivations import swish, relu, leakyRelu
+from BackBones.backbone import build_backbone_net_graph
+
+
+def customStrides(n):
+    if n <= 0:
+        return 1
+    if n >= 3:
+        return 2
+    return n
 
 
 class Encoder(tf.keras.Model):
     """
 
-    input shape: [batch, config.SIGNAL_FREQ, config.SIGNAL_PERIOD, 1]
+    input shape: [batch, 96， 96， 3]
     """
 
-    def __init__(self, repeat_times, blocks_args, config, **kwargs):
+    def __init__(self, config, repeat_times=3, prefix='encoder', **kwargs):
         super(Encoder, self).__init__(**kwargs)
         self.config = config
         self.repeat_times = repeat_times
-        self.blocks_args = blocks_args
+        self.prefix = prefix
 
         # Output shape [batch, config.SIGNAL_FREQ / 2, config.SIGNAL_PERIOD / 2, 32]
-        self.conv = tf.keras.layers.Conv2D(16, (3, 3), padding='SAME', activation='relu',
+        self.conv = tf.keras.layers.Conv2D(16, (3, 3), padding='same', activation='relu',
                                            strides=1, kernel_regularizer='l1_l2',
                                            name='encoder_conv2d_layer')
         self.ac = tf.keras.layers.Activation(relu)
@@ -28,10 +36,16 @@ class Encoder(tf.keras.Model):
         x = self.conv(inputs)
         x = self.ac(x)
         x = self.bn(x, training=training)
-
+        n = x.shape[-1]
         for i in range(self.repeat_times):
-            # TODO: Add mvconv blocks or depthwiseconv layers
-            pass
+            # x = tf.keras.layers.DepthwiseConv2D((3, 3), padding='same',
+            #                                     depth_multiplier=2, depthwise_regularizer='l1_l2',
+            #                                     name=self.prefix + 'depthwiseconv{}'.format(i + 1))(x)
+            x = tf.keras.layers.Conv2D(n * 2**(i + 1), (3, 3), strides=customStrides(i), padding='same',
+                                       name=self.prefix + 'repeat_conv{}'.format(i + 1))(x)
+            x = tf.keras.layers.Activation(swish, name=self.prefix + 'dilated{}_ac'.format(i + 1))(x)
+            # x = FixedDropout(0.3 / (i + 1), noise_shape=(None, 1, 1, 1),
+            #                  name=self.prefix + 'dropout{}'.format(i + 1))(x)
 
         return x
 
@@ -46,27 +60,28 @@ class Decoder(tf.keras.Model):
     output shape: [batch, config.SIGNAL_FREQ, config.SIGNAL_PERIOD, config.NUM_STATUS]
     """
 
-    def __init__(self, block_args, config, **kwargs):
+    def __init__(self, config, prefix='decoder', **kwargs):
         super(Decoder, self).__init__(**kwargs)
         self.config = config
-        self.block_args = block_args
+        self.prefix = prefix
 
         # TODO: should reconsider the activations.
 
         # out: [batch, 24, 24, 256]
-        self.in_layer = tf.keras.layers.Conv2D(self.config.TOP_DOWN_PYRAMID_SIZE, (7, 7), activation='relu',
-                                               kernel_regularizer='l1_l2')
+        self.in_layer = tf.keras.layers.Conv2D(self.config.TOP_DOWN_PYRAMID_SIZE, (3, 3), activation='relu',
+                                               padding='same', kernel_regularizer='l1_l2', name=self.prefix+'_in_layer')
         # out: [batch, 24, 24, 128]
         self.deconv1 = tf.keras.layers.Conv2DTranspose(128, (5, 5), (1, 1), padding='same',
-                                                       activation='relu', kernel_regularizer='l1_l2')
+                                                       activation='relu', kernel_regularizer='l1_l2',
+                                                       name=self.prefix+'_deconv1')
         self.bn1 = BatchNorm()
         # out: [batch, 48, 48, 32]
         self.deconv2 = tf.keras.layers.Conv2DTranspose(64, (5, 5), (2, 2), padding='same', activation='relu',
-                                                       kernel_regularizer='l1_l2')
+                                                       kernel_regularizer='l1_l2', name=self.prefix+'_deconv2')
         self.bn2 = BatchNorm()
         # out: [batch, 96, 96, config.NUM_STATUS]
         self.deconv3 = tf.keras.layers.Conv2DTranspose(config.NUM_MODALS * 3, (5, 5), (2, 2), padding='same',
-                                                       use_bias=False, activation='tanh')
+                                                       use_bias=False, activation='tanh', name=self.prefix+'_deconv3')
 
     def call(self, inputs, training=False):
 
@@ -85,18 +100,22 @@ class Decoder(tf.keras.Model):
 
 
 # build encoder backbones
-def get_encoders_graph(config, input_tensor):
+def get_encoders_graph(config, input_tensor=None):
     if config.ENCODER_BACKBONE == 'custom':
-        encoder = Encoder(config.DEFAULT_BLOCKS_ARGS, config)
-        return encoder.build_model(input_tensor)
+        encoder = Encoder(config, repeat_times=4, prefix='encoder')
+        if input_tensor:
+            return encoder.build_model(input_tensor)
+        return encoder
     else:
         return build_backbone_net_graph(config.ENCODER_BACKBONE, config)
 
 
 # build decoder backbones
-def get_decoders_graph(config, input_tensor):
+def get_decoders_graph(config, input_tensor=None):
     if config.DECODER_BACKBONE == 'custom':
-        decoder = Decoder(config.DEFAULT_BLOCKS_ARGS, config)
+        decoder = Decoder(config, prefix='decoder')
+        if input_tensor:
+            return decoder.build_model(input_tensor)
         return decoder
     else:
         return build_backbone_net_graph(config.DECODER_BACKBONE, config)
@@ -104,11 +123,14 @@ def get_decoders_graph(config, input_tensor):
 
 if __name__ == '__main__':
     from config import Config
-    import numpy as np
+
+    input_t = tf.keras.layers.Input([96, 96, 3])
 
     config = Config()
-    encoder = get_encoders_graph(config, None)
-    x = tf.convert_to_tensor(np.random.random([1, 128, 128, 3]), tf.float32)
-    out = encoder(x, False)
-    for o in out:
-        print(o.shape)
+    encoder = get_encoders_graph(config)
+    out = encoder(input_t)
+    print(out.shape)
+    decoder = get_decoders_graph(config)
+    out = decoder(out)
+    print(out.shape)
+
