@@ -86,8 +86,8 @@ class DCM(tf.keras.Model):
                                                 depth_multiplier=2, depthwise_regularizer='l1_l2',
                                                 name=self.prefix + 'depthwiseconv{}'.format(i + 1))(x)
             x = tf.keras.layers.Activation(swish, name=self.prefix + 'dpwconv{}_ac'.format(i + 1))(x)
-            x = FixedDropout(0.3 / (i + 1), noise_shape=(None, 1, 1, 1),
-                             name=self.prefix + 'dropout{}'.format(i + 1))(x)
+            # x = FixedDropout(0.3 / (i + 1), noise_shape=(None, 1, 1, 1),
+            #                  name=self.prefix + 'dropout{}'.format(i + 1))(x)
 
         # TODO: Find out whether need to squeeze the feature maps before passing them into dense layer.
 

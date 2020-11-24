@@ -65,7 +65,7 @@ class Decoder(tf.keras.Model):
                                                        kernel_regularizer='l1_l2')
         self.bn2 = BatchNorm()
         # out: [batch, 96, 96, config.NUM_STATUS]
-        self.deconv3 = tf.keras.layers.Conv2DTranspose(config.NUM_MODALS, (5, 5), (2, 2), padding='same',
+        self.deconv3 = tf.keras.layers.Conv2DTranspose(config.NUM_MODALS * 3, (5, 5), (2, 2), padding='same',
                                                        use_bias=False, activation='tanh')
 
     def call(self, inputs, training=False):
