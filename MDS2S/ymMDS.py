@@ -23,14 +23,14 @@ class MDS(tf.keras.Model):
         self.decoder = get_decoders_graph(config, None)
 
     def call(self, inputs, training=False):
-        [o1, o2, o3, _, _] = self.encoder(inputs, training)
+        [o1, o2, _, o3, _] = self.encoder(inputs, training)
         # TODO: find out whether need to set a middle layer between encoder and decoder. The task
         #  of middle layer is to combine the pyramid feature maps
         o1 = tf.reshape(o1, [-1, o1.shape[1] ** 2, o1.shape[3]], name=self.prefix + 'o1_reshape')
         o2 = tf.reshape(o2, [-1, o2.shape[1] ** 2, o2.shape[3]], name=self.prefix + 'o2_reshape')
         o3 = tf.reshape(o3, [-1, o3.shape[1] ** 2, o3.shape[3]], name=self.prefix + 'o3_reshape')
 
-        x = tf.concat([o1, o2, o2, o3], axis=1, name=self.prefix + 'o_concat')
+        x = tf.concat([o1, o2, o3], axis=1, name=self.prefix + 'o_concat')
         x = tf.reshape(x, [-1, self.config.DECODER_INPUT_SHAPE[1], self.config.DECODER_INPUT_SHAPE[1], x.shape[2]],
                        name=self.prefix + 'x_reshape')
         # x.set_shape([-1, self.config.DECODER_INPUT_SHAPE[1], self.config.DECODER_INPUT_SHAPE[1], x.shape[2]])

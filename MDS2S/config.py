@@ -16,7 +16,7 @@ class Config(object):
 
     NAME = None
 
-    ENCODER_BACKBONE = 'efficientnet-b1'
+    ENCODER_BACKBONE = 'efficientnet-b3'
     DECODER_BACKBONE = 'custom'
 
     GPU_COUNT = 1
@@ -116,7 +116,7 @@ class Config(object):
 
     def computeDecoderInputResolution(self):
 
-        resolution = 10 * self.SIGNAL_FREQ // 32
+        resolution = 9 * self.SIGNAL_FREQ // 32
         self.DECODER_INPUT_SHAPE = [None, resolution, resolution, self.TOP_DOWN_PYRAMID_SIZE]
 
     def to_dict(self):
