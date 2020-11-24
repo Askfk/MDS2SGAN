@@ -53,7 +53,7 @@ class DCM(tf.keras.Model):
         self.config = config
 
         # Output: [batch, 2000, 2000, 16]
-        self.conv1 = tf.keras.layers.Conv2D(16, (3, 3), padding='same', kernel_regularizer='l1_l2',name=self.prefix + 'conv1')
+        self.conv1 = tf.keras.layers.Conv2D(16, (3, 3), padding='same', name=self.prefix + 'conv1')
         self.activation1 = tf.keras.layers.Activation(leakyRelu)
         self.bn1 = BatchNorm()
 
@@ -83,9 +83,9 @@ class DCM(tf.keras.Model):
         # in every repeat, resolution decrease 4 times, channel increase 2 times
         for i in range(self.repeat_times):
             x = tf.keras.layers.DepthwiseConv2D((3, 3), padding='same',
-                                                depth_multiplier=2, depthwise_regularizer='l1_l2',
+                                                depth_multiplier=2,
                                                 name=self.prefix + 'depthwiseconv{}'.format(i + 1))(x)
-            x = tf.keras.layers.Activation(swish, name=self.prefix + 'dpwconv{}_ac'.format(i + 1))(x)
+            x = tf.keras.layers.Activation(leakyRelu, name=self.prefix + 'dpwconv{}_ac'.format(i + 1))(x)
             # x = FixedDropout(0.3 / (i + 1), noise_shape=(None, 1, 1, 1),
             #                  name=self.prefix + 'dropout{}'.format(i + 1))(x)
 
