@@ -19,7 +19,7 @@ class Encoder(tf.keras.Model):
 
         # Output shape [batch, config.SIGNAL_FREQ / 2, config.SIGNAL_PERIOD / 2, 32]
         self.conv = tf.keras.layers.Conv2D(16, (3, 3), padding='SAME', activation='relu',
-                                           strides=1,
+                                           strides=1, kernel_regularizer='l1_l2',
                                            name='encoder_conv2d_layer')
         self.ac = tf.keras.layers.Activation(relu)
         self.bn = BatchNorm()
@@ -54,13 +54,15 @@ class Decoder(tf.keras.Model):
         # TODO: should reconsider the activations.
 
         # out: [batch, 24, 24, 256]
-        self.in_layer = tf.keras.layers.Conv2D(self.config.TOP_DOWN_PYRAMID_SIZE, (7, 7), activation='relu')
+        self.in_layer = tf.keras.layers.Conv2D(self.config.TOP_DOWN_PYRAMID_SIZE, (7, 7), activation='relu',
+                                               kernel_regularizer='l1_l2')
         # out: [batch, 24, 24, 128]
         self.deconv1 = tf.keras.layers.Conv2DTranspose(128, (5, 5), (1, 1), padding='same',
-                                                       activation='relu')
+                                                       activation='relu', kernel_regularizer='l1_l2')
         self.bn1 = BatchNorm()
         # out: [batch, 48, 48, 32]
-        self.deconv2 = tf.keras.layers.Conv2DTranspose(64, (5, 5), (2, 2), padding='same', activation='relu')
+        self.deconv2 = tf.keras.layers.Conv2DTranspose(64, (5, 5), (2, 2), padding='same', activation='relu',
+                                                       kernel_regularizer='l1_l2')
         self.bn2 = BatchNorm()
         # out: [batch, 96, 96, config.NUM_STATUS]
         self.deconv3 = tf.keras.layers.Conv2DTranspose(config.NUM_MODALS * 3, (5, 5), (2, 2), padding='same',
