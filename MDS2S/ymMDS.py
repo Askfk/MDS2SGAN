@@ -85,7 +85,7 @@ class DCM(tf.keras.Model):
             x = tf.keras.layers.DepthwiseConv2D((3, 3), padding='same',
                                                 depth_multiplier=2, depthwise_regularizer='l1_l2',
                                                 name=self.prefix + 'depthwiseconv{}'.format(i + 1))(x)
-            x = tf.keras.layers.Activation(swish, name=self.prefix + 'dpwconv{}_ac'.format(i + 1))(x)
+            x = tf.keras.layers.Activation(leakyRelu, name=self.prefix + 'dpwconv{}_ac'.format(i + 1))(x)
             x = FixedDropout(0.3 / (i + 1), noise_shape=(None, 1, 1, 1),
                              name=self.prefix + 'dropout{}'.format(i + 1))(x)
 
