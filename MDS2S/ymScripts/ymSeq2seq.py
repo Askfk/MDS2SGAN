@@ -1,8 +1,8 @@
 import tensorflow as tf
 
-from .ymLayers import BatchNorm, FixedDropout, DilatedConv2d
-from .ymActivations import swish, relu, leakyRelu
-from ..BackBones.backbone import build_backbone_net_graph
+from ymLayers import BatchNorm, FixedDropout, DilatedConv2d
+from ymActivations import swish, relu, leakyRelu
+from BackBones.backbone import build_backbone_net_graph
 
 
 def customStrides(n):
@@ -37,6 +37,7 @@ class Encoder(tf.keras.Model):
         x = self.ac(x)
         x = self.bn(x, training=training)
         n = x.shape[-1]
+        out = []
         for i in range(self.repeat_times):
             # x = tf.keras.layers.DepthwiseConv2D((3, 3), padding='same',
             #                                     depth_multiplier=2, depthwise_regularizer='l1_l2',
@@ -44,10 +45,12 @@ class Encoder(tf.keras.Model):
             x = tf.keras.layers.Conv2D(n * 2**(i + 1), (3, 3), strides=customStrides(i), padding='same',
                                        name=self.prefix + 'repeat_conv{}'.format(i + 1))(x)
             x = tf.keras.layers.Activation(swish, name=self.prefix + 'dilated{}_ac'.format(i + 1))(x)
+            x = BatchNorm()(x, training=training)
+            out.append(x)
             # x = FixedDropout(0.3 / (i + 1), noise_shape=(None, 1, 1, 1),
             #                  name=self.prefix + 'dropout{}'.format(i + 1))(x)
 
-        return x
+        return out
 
     def build_model(self, input_tensor):
         outputs = self.call(input_tensor)
@@ -102,7 +105,7 @@ class Decoder(tf.keras.Model):
 # build encoder backbones
 def get_encoders_graph(config, input_tensor=None):
     if config.ENCODER_BACKBONE == 'custom':
-        encoder = Encoder(config, repeat_times=4, prefix='encoder')
+        encoder = Encoder(config, repeat_times=5, prefix='encoder')
         if input_tensor:
             return encoder.build_model(input_tensor)
         return encoder
@@ -129,8 +132,7 @@ if __name__ == '__main__':
     config = Config()
     encoder = get_encoders_graph(config)
     out = encoder(input_t)
-    print(out.shape)
-    decoder = get_decoders_graph(config)
-    out = decoder(out)
-    print(out.shape)
+    for o in out:
+        print(o.shape)
+
 

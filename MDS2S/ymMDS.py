@@ -1,8 +1,8 @@
 import tensorflow as tf
 
-from .ymScripts.ymActivations import swish, leakyRelu
-from .ymScripts.ymLayers import BatchNorm, FixedDropout
-from .ymScripts.ymSeq2seq import get_encoders_graph, get_decoders_graph
+from ymScripts.ymActivations import swish, leakyRelu
+from ymScripts.ymLayers import BatchNorm, FixedDropout
+from ymScripts.ymSeq2seq import get_encoders_graph, get_decoders_graph
 
 
 tf.config.experimental_run_functions_eagerly(True)
@@ -20,17 +20,22 @@ class MDS(tf.keras.Model):
         self.prefix = prefix
 
         self.encoder = get_encoders_graph(config, None)
+
         self.decoder = get_decoders_graph(config, None)
 
     def call(self, inputs, training=False):
         x = self.encoder(inputs, training)
-        # x = self.concatPyramidFeatures(x)
+        x = self.concatPyramidFeatures(x)
         x = self.decoder(x, training)
 
         return x
 
     def concatPyramidFeatures(self, features):
-        [o1, o2, _, o3, _] = features
+        for i in range(len(features)):
+            features[i] = tf.keras.layers.Conv2D(self.config.TOP_DOWN_PYRAMID_SIZE, (3, 3), padding='same',
+                                                   activation='relu')(features[i])
+        [_, o1, o2, _, o3] = features
+
         # TODO: find out whether need to set a middle layer between encoder and decoder. The task
         #  of middle layer is to combine the pyramid feature maps
         o1 = tf.reshape(o1, [-1, o1.shape[1] ** 2, o1.shape[3]], name=self.prefix + 'o1_reshape')
@@ -91,8 +96,9 @@ class DCM(tf.keras.Model):
                                                 depth_multiplier=2, depthwise_regularizer='l1_l2',
                                                 name=self.prefix + 'depthwiseconv{}'.format(i + 1))(x)
             x = tf.keras.layers.Activation(leakyRelu, name=self.prefix + 'dpwconv{}_ac'.format(i + 1))(x)
-            x = FixedDropout(0.3 / (i + 1), noise_shape=(None, 1, 1, 1),
-                             name=self.prefix + 'dropout{}'.format(i + 1))(x)
+            x = BatchNorm()(x, training=training)
+            # x = FixedDropout(0.3 / (i + 1), noise_shape=(None, 1, 1, 1),
+            #                  name=self.prefix + 'dropout{}'.format(i + 1))(x)
 
         # TODO: Find out whether need to squeeze the feature maps before passing them into dense layer.
 
@@ -122,11 +128,11 @@ if __name__ == '__main__':
     # out = mds(inp, False)
     inp = tf.keras.layers.Input([96, 96, 3])
     mds_out = mds(inp, False)
+    print(mds_out.shape)
     dcm_out = dcm(mds_out, False)
     model = tf.keras.Model(inp, dcm_out)
     model.summary()
-    for o in model.outputs:
-        print(o.shape)
+
 
 
 
