@@ -122,19 +122,15 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     config = Config()
     mds = MDS(config)
-    dcm = DCM(config, 2)
+    dcm = DCM(config)
 
     # inp = tf.convert_to_tensor(np.random.random([3, 128, 128, 3]), tf.float32)
     # out = mds(inp, False)
-    inp = tf.keras.layers.Input([96, 96, 3])
+    # inp = tf.keras.layers.Input([96, 96, 3])
+    inp = tf.random.uniform([6, 96, 96, 3])
     mds_out = mds(inp, False)
     print(mds_out.shape)
     dcm_out = dcm(mds_out, False)
-    model = tf.keras.Model(inp, dcm_out)
-    model.summary()
-
-
-
-
-
-
+    # model = tf.keras.Model(inp, dcm_out)
+    # model.summary()
+    print(dcm_out.shape)

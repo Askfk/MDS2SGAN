@@ -20,7 +20,7 @@ class Config(object):
     DECODER_BACKBONE = 'custom'
 
     ENCODER_REPEAT = 5
-
+    DECODER_REPEAT = 5
     DCM_REPEAT = 3
 
     GPU_COUNT = 1
@@ -120,7 +120,7 @@ class Config(object):
 
     def computeDecoderInputResolution(self):
 
-        resolution = 9 * self.SIGNAL_FREQ // 32
+        resolution = 9 * self.SIGNAL_FREQ // 8
         self.DECODER_INPUT_SHAPE = [None, resolution, resolution, self.TOP_DOWN_PYRAMID_SIZE]
 
     def to_dict(self):
