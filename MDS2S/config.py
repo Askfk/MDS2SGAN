@@ -19,6 +19,10 @@ class Config(object):
     ENCODER_BACKBONE = 'custom'
     DECODER_BACKBONE = 'custom'
 
+    ENCODER_REPEAT = 5
+
+    DCM_REPEAT = 3
+
     GPU_COUNT = 1
     SIGNAL_PIC_PER_IMAGE = 1
 

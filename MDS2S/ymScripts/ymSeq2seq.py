@@ -19,10 +19,10 @@ class Encoder(tf.keras.Model):
     input shape: [batch, 96， 96， 3]
     """
 
-    def __init__(self, config, repeat_times=3, prefix='encoder', **kwargs):
+    def __init__(self, config, prefix='encoder', **kwargs):
         super(Encoder, self).__init__(**kwargs)
         self.config = config
-        self.repeat_times = repeat_times
+        self.repeat_times = config.ENCODER_REPEAT
         self.prefix = prefix
 
         # Output shape [batch, config.SIGNAL_FREQ / 2, config.SIGNAL_PERIOD / 2, 32]
@@ -105,7 +105,7 @@ class Decoder(tf.keras.Model):
 # build encoder backbones
 def get_encoders_graph(config, input_tensor=None):
     if config.ENCODER_BACKBONE == 'custom':
-        encoder = Encoder(config, repeat_times=5, prefix='encoder')
+        encoder = Encoder(config, prefix='encoder')
         if input_tensor:
             return encoder.build_model(input_tensor)
         return encoder

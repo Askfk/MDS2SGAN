@@ -56,10 +56,10 @@ class MDS(tf.keras.Model):
 class DCM(tf.keras.Model):
     """Discriminator Classifier Model"""
 
-    def __init__(self, config, repeat_times, prefix='', **kwargs):
+    def __init__(self, config, prefix='', **kwargs):
         super(DCM, self).__init__(**kwargs)
         self.prefix = prefix + '_'
-        self.repeat_times = repeat_times
+        self.repeat_times = config.DCM_REPEAT
         self.config = config
 
         # Output: [batch, 2000, 2000, 16]
