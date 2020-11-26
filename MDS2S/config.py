@@ -99,6 +99,9 @@ class Config(object):
 
     DROP_CONNECT_RATE = 0.2
 
+    DATASET_URL = "https://github.com/Askfk/MDS2SGAN/releases/download/1/1120.zip"
+
+
     # TODO: Add damage type dictionary.
 
     def __init__(self):
