@@ -39,7 +39,7 @@ def categorical_focal_loss(gamma=2.0, alpha=0.25):
     return focal_loss
 
 
-def generator_loss_graph(predictions, ground_truth, loss_func=tf.keras.losses.MSE):
+def generator_loss_graph(num_modals, predictions, ground_truth, loss_func=tf.keras.losses.MSE):
     """As designed, the predictions should be the classification of the
     distractions.
 
@@ -56,8 +56,11 @@ def generator_loss_graph(predictions, ground_truth, loss_func=tf.keras.losses.MS
 
     To be notable, all the values should be in the normalized coordinates.
     """
+    tempre = []
+    for i in range(3):
+        tempre.append(tf.reduce_sum(predictions[:, :, :, i*num_modals: (i+1)*num_modals], axis=3, keepdims=True))
+    predictions = tf.concat(tempre, axis=3)
     mode_1_loss = K.mean(loss_func(predictions, ground_truth))
-
     ground_truth_in = tf.reduce_sum(ground_truth, 3)
 
     # out: [batch, *resolutions, 1]
@@ -96,14 +99,7 @@ def discriminator_loss_graph(pred_pred_class, gt_class, pred_gt_class=None,
 
 
 if __name__ == '__main__':
-    import numpy as np
-    predic = np.random.randn(3, 400, 400, 12)
-    ground_truth_out = np.random.randn(3, 400, 400, 12)
-    l1 = generator_loss_graph(predic, ground_truth_out)
-    print(l1)
-
-    pred = np.random.randn(3, 6)
-    gt = np.random.randn(3, 6)
-    pred_gt = np.random.randn(3, 6)
-    l2 = discriminator_loss_graph(pred, gt, pred_gt_class=pred_gt)
-    print(l2)
+    test_data = tf.random.uniform([6, 96, 96, 12])
+    test_gt = tf.random.uniform([6, 96, 96, 3])
+    pre = generator_loss_graph(4, test_data, test_gt)
+    print(pre)
