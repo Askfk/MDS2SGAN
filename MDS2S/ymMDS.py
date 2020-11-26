@@ -133,4 +133,4 @@ if __name__ == '__main__':
     dcm_out = dcm(mds_out, False)
     # model = tf.keras.Model(inp, dcm_out)
     # model.summary()
-    print(dcm_out.shape)
+    # print(dcm_out.shape)

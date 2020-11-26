@@ -120,8 +120,8 @@ class Config(object):
 
     def computeDecoderInputResolution(self):
 
-        resolution = 9 * self.SIGNAL_FREQ // 8
-        self.DECODER_INPUT_SHAPE = [None, resolution, resolution, self.TOP_DOWN_PYRAMID_SIZE]
+        self.resolution = 9 * self.SIGNAL_FREQ // 8
+        self.DECODER_INPUT_SHAPE = [None, self.resolution, self.resolution, self.TOP_DOWN_PYRAMID_SIZE]
 
     def to_dict(self):
         return {a: getattr(self, a)
@@ -137,3 +137,8 @@ class Config(object):
         #     if not a.startswith("__") and not callable(getattr(self, a)):
         #         print("{:30} {}".format(a, getattr(self, a)))
         print("\n")
+
+
+if __name__ == '__main__':
+    c = Config()
+    print(c.resolution)

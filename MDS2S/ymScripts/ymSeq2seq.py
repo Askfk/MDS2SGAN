@@ -42,7 +42,7 @@ class Encoder(tf.keras.Model):
             # x = tf.keras.layers.DepthwiseConv2D((3, 3), padding='same',
             #                                     depth_multiplier=2, depthwise_regularizer='l1_l2',
             #                                     name=self.prefix + 'depthwiseconv{}'.format(i + 1))(x)
-            x = tf.keras.layers.Conv2D(n * 2**(i + 1), (3, 3), strides=customStrides(i), padding='same',
+            x = tf.keras.layers.Conv2D(n * 2 ** (i + 1), (3, 3), strides=customStrides(i), padding='same',
                                        name=self.prefix + 'repeat_conv{}'.format(i + 1))(x)
             x = tf.keras.layers.Activation(swish, name=self.prefix + 'dilated{}_ac'.format(i + 1))(x)
             x = BatchNorm()(x, training=training)
@@ -59,7 +59,7 @@ class Encoder(tf.keras.Model):
 
 class Decoder(tf.keras.Model):
     """
-    input shape: [batch, 36, 36, 256]
+    input shape: [batch, 108, 108, 256]
     output shape: [batch, config.SIGNAL_FREQ, config.SIGNAL_PERIOD, config.NUM_STATUS]
     """
 
@@ -70,31 +70,41 @@ class Decoder(tf.keras.Model):
 
         # TODO: should reconsider the activations.
 
-        # out: [batch, 24, 24, 256]
-        self.in_layer = tf.keras.layers.Conv2D(self.config.TOP_DOWN_PYRAMID_SIZE, (3, 3), activation='relu',
-                                               padding='same', kernel_regularizer='l1_l2', name=self.prefix+'_in_layer')
-        # out: [batch, 24, 24, 128]
-        self.deconv1 = tf.keras.layers.Conv2DTranspose(128, (5, 5), (1, 1), padding='same',
-                                                       activation='relu', kernel_regularizer='l1_l2',
-                                                       name=self.prefix+'_deconv1')
-        self.bn1 = BatchNorm()
-        # out: [batch, 48, 48, 32]
-        self.deconv2 = tf.keras.layers.Conv2DTranspose(64, (5, 5), (2, 2), padding='same', activation='relu',
-                                                       kernel_regularizer='l1_l2', name=self.prefix+'_deconv2')
-        self.bn2 = BatchNorm()
-        # out: [batch, 96, 96, config.NUM_STATUS]
-        self.deconv3 = tf.keras.layers.Conv2DTranspose(config.NUM_MODALS * 3, (5, 5), (2, 2), padding='same',
-                                                       use_bias=False, activation='tanh', name=self.prefix+'_deconv3')
+        # # out: [batch, 24, 24, 256]
+        # self.in_layer = tf.keras.layers.Conv2D(self.config.TOP_DOWN_PYRAMID_SIZE, (3, 3), activation='relu',
+        #                                        padding='same', kernel_regularizer='l1_l2', name=self.prefix+'_in_layer')
+        # # out: [batch, 24, 24, 128]
+        # self.deconv1 = tf.keras.layers.Conv2DTranspose(128, (5, 5), (1, 1), padding='same',
+        #                                                activation='relu', kernel_regularizer='l1_l2',
+        #                                                name=self.prefix+'_deconv1')
+        # self.bn1 = BatchNorm()
+        # # out: [batch, 48, 48, 32]
+        # self.deconv2 = tf.keras.layers.Conv2DTranspose(64, (5, 5), (2, 2), padding='same', activation='relu',
+        #                                                kernel_regularizer='l1_l2', name=self.prefix+'_deconv2')
+        # self.bn2 = BatchNorm()
+        # # out: [batch, 96, 96, config.NUM_STATUS]
+        # self.deconv3 = tf.keras.layers.Conv2DTranspose(config.NUM_MODALS * 3, (5, 5), (2, 2), padding='same',
+        #                                                use_bias=False, activation='tanh', name=self.prefix+'_deconv3')
 
     def call(self, inputs, training=False):
+        # x = self.in_layer(inputs)
+        # x = self.deconv1(x)
+        # x = self.bn1(x, training=training)
+        # x = self.deconv2(x)
+        # x = self.bn2(x, training=training)
+        # x = self.deconv3(x)
 
-        x = self.in_layer(inputs)
-        x = self.deconv1(x)
-        x = self.bn1(x, training=training)
-        x = self.deconv2(x)
-        x = self.bn2(x, training=training)
-        x = self.deconv3(x)
+        repeat_times = (inputs.shape[1] - self.config.SIGNAL_FREQ) // 4 - 1
+        x = inputs
+        for i in range(repeat_times):
+            x = tf.keras.layers.Conv2D(x.shape[-1] // 2, (5, 5), strides=1, padding='valid',
+                                       name=self.prefix + '_conv{}'.format(i + 1))(x)
+            x = tf.keras.layers.Activation(leakyRelu)(x)
+            x = BatchNorm()(x, training=training)
 
+        x = tf.keras.layers.Conv2D(self.config.NUM_MODALS * 3, (5, 5), strides=1, padding='valid',
+                                   name=self.prefix + 'out_conv')(x)
+        x = tf.keras.layers.Activation(leakyRelu)(x)
         return x
 
     def build_model(self, input_tensors):
@@ -134,5 +144,3 @@ if __name__ == '__main__':
     out = encoder(input_t)
     for o in out:
         print(o.shape)
-
-

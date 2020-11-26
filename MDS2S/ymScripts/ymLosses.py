@@ -60,13 +60,7 @@ def generator_loss_graph(num_modals, predictions, ground_truth, loss_func=tf.ker
     for i in range(3):
         tempre.append(tf.reduce_sum(predictions[:, :, :, i*num_modals: (i+1)*num_modals], axis=3, keepdims=True))
     predictions = tf.concat(tempre, axis=3)
-    mode_1_loss = K.mean(loss_func(predictions, ground_truth))
-    ground_truth_in = tf.reduce_sum(ground_truth, 3)
-
-    # out: [batch, *resolutions, 1]
-    predictions_in = tf.reduce_sum(predictions, 3)
-    mode_2_loss = K.mean(loss_func(predictions_in, ground_truth_in))
-    loss = mode_1_loss + mode_2_loss
+    loss = K.mean(loss_func(predictions, ground_truth))
     final_loss = K.switch(tf.math.is_nan(loss), 0, loss)
     return final_loss
 
