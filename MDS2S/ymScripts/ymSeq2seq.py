@@ -105,6 +105,8 @@ class Decoder(tf.keras.Model):
         x = tf.keras.layers.Conv2D(self.config.NUM_MODALS * 3, (5, 5), strides=1, padding='valid',
                                    name=self.prefix + 'out_conv')(x)
         x = tf.keras.layers.Activation(leakyRelu)(x)
+        x = BatchNorm()(x, training=training)
+        
         return x
 
     def build_model(self, input_tensors):
