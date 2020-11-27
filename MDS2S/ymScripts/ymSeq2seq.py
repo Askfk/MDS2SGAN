@@ -1,8 +1,8 @@
 import tensorflow as tf
 
-from ymLayers import BatchNorm, FixedDropout, DilatedConv2d
-from ymActivations import swish, relu, leakyRelu
-from BackBones.backbone import build_backbone_net_graph
+from .ymLayers import BatchNorm, FixedDropout, DilatedConv2d
+from .ymActivations import swish, relu, leakyRelu
+from ..BackBones.backbone import build_backbone_net_graph
 
 
 def customStrides(n):
