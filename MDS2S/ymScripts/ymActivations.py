@@ -19,6 +19,6 @@ def relu6(x):
     return tf.nn.relu6(x)
 
 
-def leakyRelu(x):
+def leakyRelu(x, alpha=0.2):
 
-    return tf.nn.leaky_relu(x)
+    return tf.nn.leaky_relu(x, alpha=alpha)

@@ -1,6 +1,7 @@
 """Generative Adversarial model loss function."""
 import tensorflow as tf
 import tensorflow.keras.backend as K
+from ..config import Config
 
 
 def categorical_focal_loss(gamma=2.0, alpha=0.25):
@@ -39,7 +40,7 @@ def categorical_focal_loss(gamma=2.0, alpha=0.25):
     return focal_loss
 
 
-def generator_loss_graph(num_modals, predictions, ground_truth, loss_func=tf.keras.losses.MSE):
+def generator_loss_graph(num_modals, predictions, ground_truth, amplifier=Config.AMPLIFIER, loss_func=tf.keras.losses.MSE):
     """As designed, the predictions should be the classification of the
     distractions.
 
@@ -60,7 +61,7 @@ def generator_loss_graph(num_modals, predictions, ground_truth, loss_func=tf.ker
     for i in range(3):
         tempre.append(tf.reduce_sum(predictions[:, :, :, i*num_modals: (i+1)*num_modals], axis=3, keepdims=True))
     predictions = tf.concat(tempre, axis=3)
-    loss = K.mean(loss_func(predictions, ground_truth))
+    loss = K.mean(loss_func(predictions / amplifier, ground_truth / amplifier))
     final_loss = K.switch(tf.math.is_nan(loss), 0, loss)
     return final_loss
 
