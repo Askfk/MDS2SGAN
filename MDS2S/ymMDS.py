@@ -27,7 +27,7 @@ class MDS(tf.keras.Model):
 
     def call(self, inputs, training=False):
         x = self.encoder(inputs, training)
-        x = self.concatPyramidFeatures(x)
+        x = self.middle(x, training=training)
         x = self.decoder(x, training)
 
         return x
