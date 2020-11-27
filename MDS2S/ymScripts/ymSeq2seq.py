@@ -95,9 +95,9 @@ class Decoder(tf.keras.Model):
         # x = self.deconv3(x)
         x = tf.keras.layers.Conv2D(128, (5, 5), padding='valid', activation='relu')(inputs)
         x = BatchNorm()(x, training=training)
-        x = tf.keras.layers.Conv2D(64, (5, 5), padding='valid', activation='relu')(inputs)
+        x = tf.keras.layers.Conv2D(64, (5, 5), padding='valid', activation='relu')(x)
         x = BatchNorm()(x, training=training)
-        x = tf.keras.layers.Conv2D(12, (5, 5), padding='valid', activation='relu')(inputs)
+        x = tf.keras.layers.Conv2D(12, (5, 5), padding='valid', activation='relu')(x)
 
         return x
 
