@@ -21,7 +21,7 @@ class Config(object):
 
     ENCODER_REPEAT = 5
     DECODER_REPEAT = 5
-    DCM_REPEAT = 3
+    DCM_REPEAT = 6
 
     GPU_COUNT = 1
     SIGNAL_PIC_PER_IMAGE = 1
