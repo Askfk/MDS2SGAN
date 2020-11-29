@@ -63,7 +63,7 @@ def generator_loss_graph(num_modals, predictions, ground_truth, amplifier=Config
     predictions = tf.concat(tempre, axis=3)
     loss = K.mean(loss_func(predictions, ground_truth / amplifier))
     final_loss = K.switch(tf.math.is_nan(loss), 0, loss)
-    return tf.abs(final_loss)
+    return final_loss
 
 
 def discriminator_loss_graph(pred_pred_class, gt_class, pred_gt_class=None,
@@ -81,11 +81,11 @@ def discriminator_loss_graph(pred_pred_class, gt_class, pred_gt_class=None,
     """
 
     if pred_gt_class is not None:
-        mode_3_loss = K.mean(loss_func(pred_gt_class, gt_class, from_logits=True))
+        mode_3_loss = K.mean(loss_func(gt_class, pred_gt_class, from_logits=True))
     else:
         mode_3_loss = 0
 
-    mode_4_loss = K.mean(loss_func(pred_pred_class, gt_class, from_logits=True))
+    mode_4_loss = K.mean(loss_func(gt_class, pred_pred_class, from_logits=True))
 
     loss = mode_3_loss + mode_4_loss
     final_loss = K.switch(tf.math.is_nan(loss), 0, loss)
