@@ -106,9 +106,9 @@ class DCM(tf.keras.Model):
 
         # Flatten x,
         x = tf.keras.layers.Flatten()(x)
-        x = self.final_dense(x)
-        x = self.softmax(x)
-        return x
+        logits = self.final_dense(x)
+        results = self.softmax(x)
+        return logits, results
 
     def build_model(self, input_tensors):
         outputs = self.call(input_tensors, self.config.TRAIN_BN)
@@ -132,7 +132,7 @@ if __name__ == '__main__':
     inp = tf.random.uniform([6, 96, 96, 3])
     mds_out = mds(inp, False)
     print(mds_out.shape)
-    dcm_out = dcm(mds_out, False)
+    _, dcm_out = dcm(mds_out, False)
     # model = tf.keras.Model(inp, dcm_out)
     # model.summary()
     # print(dcm_out.shape)

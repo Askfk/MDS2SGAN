@@ -3,6 +3,7 @@ import collections
 
 class Config(object):
 
+    BATCH_SIZE = 6
     SIGNAL_FREQ = 96
     SIGNAL_PERIOD = 96
 

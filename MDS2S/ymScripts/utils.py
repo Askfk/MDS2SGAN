@@ -11,6 +11,7 @@ import numpy as np
 import warnings
 import scipy
 import urllib.request
+import matplotlib.pyplot as plt
 
 
 WEIGHTS_URL = ''
@@ -57,3 +58,35 @@ def download_dataset(dataset_path, verbose=1):
         shutil.copyfileobj(resp, out)
     if verbose > 0:
         print("... done downloading dataset!")
+
+
+def visualize_signals(signals, ax=None, figsize=(16, 16)):
+    """
+    Visualize signals sets by subpot
+    :param signals:
+    :return:
+    """
+
+    n = signals.shape[0]
+    plt.figure(figsize=figsize)
+    if not ax:
+        _, ax = plt.subplots(n, 1)
+
+    for i in range(n):
+        pass
+
+
+def visualize_multi_and_single_modals(multi, single, ax=None, figsize=(16, 16), save_path=None):
+    """
+    Visualize the original multi-modals signal and its corresponding single-modal signals
+
+    :param multi: multi-modal signal
+    :param single: single-modal signals
+    :param ax:
+    :param figsize:
+    :param save_path: the path to save results
+    """
+
+    batch_size = multi.shape[0]
+    signal_nums = multi.shape[-1]
+
