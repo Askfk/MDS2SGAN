@@ -27,7 +27,8 @@ class MDS(tf.keras.Model):
 
     def call(self, inputs, training=False):
         x = self.encoder(inputs, training)
-        x = self.middle(x, training)
+        # x = self.middle(x, training)
+        x = self.backup(x)
         x = self.decoder(x, training)
 
         return x
@@ -49,6 +50,10 @@ class MDS(tf.keras.Model):
                        name=self.prefix + 'x_reshape')
         # x.set_shape([-1, self.config.DECODER_INPUT_SHAPE[1], self.config.DECODER_INPUT_SHAPE[1], x.shape[2]])
         return x
+
+    def backup(self, features):
+        [_, o1, o2, _, o3] = features
+        return o3
 
     def build_model(self, inp_tensor):
         out_tensor = self.call(inp_tensor, False)
