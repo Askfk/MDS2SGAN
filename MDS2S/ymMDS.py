@@ -52,7 +52,7 @@ class MDS(tf.keras.Model):
         return x
 
     def backup(self, features):
-        [_, o1, o2, _, o3] = features
+        [_, o1, o2, o3, _] = features
         return o3
 
     def build_model(self, inp_tensor):
