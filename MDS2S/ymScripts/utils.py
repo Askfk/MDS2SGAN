@@ -112,8 +112,8 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
             ax[1, j].set_title('sum_error_{}'.format(j+1))
         if save_path:
             pass
-        plt.show()
-        plt.plot
+        # plt.tight_layout()
+        # plt.show()
 
 
 if __name__ == '__main__':
@@ -122,4 +122,3 @@ if __name__ == '__main__':
     original = tf.random.uniform([2, 96, 96, 3])
     decomposed = tf.random.uniform([2, 96, 96, 12])
     visualize_original_and_decomposed_modals(original, decomposed)
-    plt.plot
