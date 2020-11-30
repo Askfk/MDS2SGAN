@@ -105,7 +105,7 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
             for n in range(num_modals):
                 sum_signal += decomposed_signals[:, :, n + j * num_modals]
                 ax[2 + n, j].plot(decomposed_signals[:, :, n + j * num_modals].numpy().flatten())
-                ax[1 + n, j].set_title("Decomposed_{}_{}".format(j + 1, n + 1))
+                ax[2 + n, j].set_title("Decomposed_{}_{}".format(j + 1, n + 1))
             error = original_signal[:, :, j] - sum_signal
             ax[1, j].plot(sum_signal.numpy().flatten(), color='c')
             ax[1, j].plot(error.numpy().flatten(), color='m')
