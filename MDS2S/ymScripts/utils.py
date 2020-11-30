@@ -107,8 +107,8 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
                 ax[2 + n, j].plot(decomposed_signals[:, :, n + j * num_modals].numpy().flatten())
                 ax[1 + n, j].set_title("Decomposed_{}_{}".format(j + 1, n + 1))
             error = original_signal[:, :, j] - sum_signal
-            ax[1, j].plot(sum_signal.numpy().flatten(), color='b')
-            ax[1, j].plot(error.numpy().flatten(), color='r')
+            ax[1, j].plot(sum_signal.numpy().flatten(), color='c')
+            ax[1, j].plot(error.numpy().flatten(), color='m')
             ax[1, j].set_title('sum_error_{}'.format(j+1))
         if save_path:
             pass
@@ -122,3 +122,4 @@ if __name__ == '__main__':
     original = tf.random.uniform([2, 96, 96, 3])
     decomposed = tf.random.uniform([2, 96, 96, 12])
     visualize_original_and_decomposed_modals(original, decomposed)
+    plt.plot
