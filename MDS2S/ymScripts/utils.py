@@ -12,7 +12,7 @@ import warnings
 import scipy
 import urllib.request
 import matplotlib.pyplot as plt
-from config import Config
+from ..config import Config
 
 WEIGHTS_URL = ''
 DATASET_URL = "https://github.com/Askfk/MDS2SGAN/releases/download/1/1120.zip"
