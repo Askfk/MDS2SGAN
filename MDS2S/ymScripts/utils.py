@@ -76,7 +76,7 @@ def visualize_signals(signals, ax=None, figsize=(16, 16)):
         pass
 
 
-def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=None, figsize=(16, 16), save_path=None,
+def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=None, figsize=(25, 16), save_path=None,
                                              num_modals=Config.NUM_MODALS):
     """
     Visualize the original multi-modals signal and its corresponding single-modal signals
@@ -93,17 +93,23 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
     batch_size = min(show_batch, multi.shape[0])
     signal_nums = multi.shape[-1]
     if not ax:
-        _, ax = plt.subplots(num_modals + 1, signal_nums, figsize=figsize)
+        _, ax = plt.subplots(num_modals + 2, signal_nums, figsize=figsize)
 
     for i in range(batch_size):
         original_signal = multi[i]
         decomposed_signals = single[i]
         for j in range(signal_nums):
+            sum_signal = 0
             ax[0, j].plot(original_signal[:, :, j].numpy().flatten())
             ax[0, j].set_title("Original_{}".format(j + 1))
             for n in range(num_modals):
-                ax[1 + n, j].plot(decomposed_signals[:, :, n].numpy().flatten())
+                sum_signal += decomposed_signals[:, :, n + j * signal_nums]
+                ax[2 + n, j].plot(decomposed_signals[:, :, n + j * signal_nums].numpy().flatten())
                 ax[1 + n, j].set_title("Decomposed_{}_{}".format(j + 1, n + 1))
+            error = original_signal[:, :, j] - sum_signal
+            ax[1, j].plot(sum_signal.numpy().flatten())
+            ax[1, j].plot(error.numpy().flatten())
+            ax[1, j].set_title('sum_error_{}'.format(j+1))
         if save_path:
             pass
         plt.show()

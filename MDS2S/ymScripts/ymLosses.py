@@ -40,7 +40,8 @@ def categorical_focal_loss(gamma=2.0, alpha=0.25):
     return focal_loss
 
 
-def generator_loss_graph(num_modals, predictions, ground_truth, amplifier=Config.AMPLIFIER, loss_func=tf.keras.losses.MSE):
+def generator_loss_graph(predictions, ground_truth, amplifier=Config.AMPLIFIER, num_modals=Config.NUM_MODALS,
+                         loss_func=tf.keras.losses.MSE):
     """As designed, the predictions should be the classification of the
     distractions.
 
