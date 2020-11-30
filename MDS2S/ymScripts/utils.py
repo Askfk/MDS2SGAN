@@ -12,7 +12,7 @@ import warnings
 import scipy
 import urllib.request
 import matplotlib.pyplot as plt
-from ..config import Config
+from config import Config
 
 WEIGHTS_URL = ''
 DATASET_URL = "https://github.com/Askfk/MDS2SGAN/releases/download/1/1120.zip"
@@ -99,12 +99,12 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
         original_signal = multi[i]
         decomposed_signals = single[i]
         for j in range(signal_nums):
-            sum_signal = 0
+            sum_signal = tf.ones_like(original_signal[:, :, j])
             ax[0, j].plot(original_signal[:, :, j].numpy().flatten())
             ax[0, j].set_title("Original_{}".format(j + 1))
             for n in range(num_modals):
-                sum_signal += decomposed_signals[:, :, n + j * signal_nums]
-                ax[2 + n, j].plot(decomposed_signals[:, :, n + j * signal_nums].numpy().flatten())
+                sum_signal += decomposed_signals[:, :, n + j * num_modals]
+                ax[2 + n, j].plot(decomposed_signals[:, :, n + j * num_modals].numpy().flatten())
                 ax[1 + n, j].set_title("Decomposed_{}_{}".format(j + 1, n + 1))
             error = original_signal[:, :, j] - sum_signal
             ax[1, j].plot(sum_signal.numpy().flatten())
@@ -119,5 +119,5 @@ if __name__ == '__main__':
     import tensorflow as tf
 
     original = tf.random.uniform([2, 96, 96, 3])
-    decomposed = tf.random.uniform([2, 95, 96, 12])
+    decomposed = tf.random.uniform([2, 96, 96, 12])
     visualize_original_and_decomposed_modals(original, decomposed)
