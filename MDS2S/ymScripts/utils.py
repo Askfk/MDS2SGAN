@@ -107,7 +107,7 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
                 os = denosing(os).out
             ax[0, j].plot(os)
             ax[0, j].set_title("Original_{}".format(j + 1))
-            ax[0, j].ylim(*ylim)
+            ax[0, j].set_ylim(ylim)
             for n in range(num_modals):
                 ds = decomposed_signals[:, :, n + j * num_modals].numpy().flatten()
                 if denosing:
@@ -115,12 +115,12 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
                 sum_signal += ds
                 ax[2 + n, j].plot(ds)
                 ax[2 + n, j].set_title("Decomposed_{}_{}".format(j + 1, n + 1))
-                ax[2 + n, j].ylim(*ylim)
+                ax[2 + n, j].set_ylim(ylim)
             error = os - sum_signal
             ax[1, j].plot(sum_signal, color='m')
             ax[1, j].plot(error, color='c')
             ax[1, j].set_title('sum_error_{}'.format(j+1))
-            ax[1, j].ylim(*ylim)
+            ax[1, j].set_ylim(ylim)
         if save_path:
             pass
         # plt.tight_layout()
