@@ -76,12 +76,12 @@ def visualize_signals(signals, ax=None, figsize=(16, 16)):
         pass
 
 
-def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=None, figsize=(25, 16), save_path=None,
+def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsize=(25, 16), save_path=None,
                                              num_modals=Config.NUM_MODALS, denosing=None, ylim=(-0.8, 0.8)):
     """
     Visualize the original multi-modals signal and its corresponding single-modal signals
 
-    :param y_range:
+    :param ylim:
     :param denosing:
     :param num_modals:
     :param multi: multi-modal signal
@@ -94,8 +94,7 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
 
     batch_size = min(show_batch, multi.shape[0])
     signal_nums = multi.shape[-1]
-    if not ax:
-        _, ax = plt.subplots(num_modals + 2, signal_nums, figsize=figsize)
+    figure, ax = plt.subplots(num_modals + 2, signal_nums, figsize=figsize)
 
     for i in range(batch_size):
         original_signal = multi[i]
@@ -123,8 +122,9 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
             ax[1, j].set_ylim(ylim)
         if save_path:
             pass
-        # plt.tight_layout()
-        # plt.show()
+
+    return figure, ax
+
 
 if __name__ == '__main__':
     import tensorflow as tf
