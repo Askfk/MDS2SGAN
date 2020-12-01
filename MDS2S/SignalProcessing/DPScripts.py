@@ -5,7 +5,7 @@ import numpy as np
 import itertools
 import tensorflow as tf
 
-from ..config import Config as config
+from config import Config as config
 
 from .EDA import autoEDA
 from .EMD import autoEMD
@@ -208,14 +208,19 @@ def dataGenerator():
 
 
 if __name__ == '__main__':
-    import tensorflow as tf
-    dataset = tf.data.Dataset.from_generator(dataGenerator, (tf.float32, tf.int16),
-                                             (tf.TensorShape([config.SIGNAL_PERIOD, config.SIGNAL_FREQ, 3]),
-                                              tf.TensorShape([None])))
-    dataset = dataset.batch(2).shuffle(12)
-    for data, label in dataset:
-        print("{}---{}".format(data.shape, label))
+    # import tensorflow as tf
+    # dataset = tf.data.Dataset.from_generator(dataGenerator, (tf.float32, tf.int16),
+    #                                          (tf.TensorShape([config.SIGNAL_PERIOD, config.SIGNAL_FREQ, 3]),
+    #                                           tf.TensorShape([None])))
+    # dataset = dataset.batch(2).shuffle(12)
+    # for data, label in dataset:
+    #     print("{}---{}".format(data.shape, label))
 
+    file_name = '1715-24m-12000-300k-2000mv-10db-s2-3'
+    res = getData(os.path.join(ROOT_DIR, file_name))
+    autoEDA(res)
+    autoVMD(res)
+    autoEMD(res)
 
     # file_names = os.listdir(ROOT_DIR)
     # data = getDataPairs(file_names)

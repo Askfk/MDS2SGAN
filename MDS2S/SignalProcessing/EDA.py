@@ -29,8 +29,6 @@ import scipy
 from scipy import signal
 from scipy.signal import butter, deconvolve
 
-from ..config import Config
-
 
 def average_smoothing(signal, kernel_size=3, stride=1):
     sample = [signal[0]]

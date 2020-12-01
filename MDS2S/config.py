@@ -13,7 +13,7 @@ class Config(object):
     NUM_CLASSES = 6
 
     # The num of mode status of lamb wave
-    NUM_MODALS = 4
+    NUM_MODALS = 3
 
     NAME = None
 

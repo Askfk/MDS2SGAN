@@ -77,10 +77,11 @@ def visualize_signals(signals, ax=None, figsize=(16, 16)):
 
 
 def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=None, figsize=(25, 16), save_path=None,
-                                             num_modals=Config.NUM_MODALS):
+                                             num_modals=Config.NUM_MODALS, denosing=None):
     """
     Visualize the original multi-modals signal and its corresponding single-modal signals
 
+    :param denosing:
     :param num_modals:
     :param multi: multi-modal signal
     :param single: single-modal signals
@@ -99,16 +100,22 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, ax=Non
         original_signal = multi[i]
         decomposed_signals = single[i]
         for j in range(signal_nums):
-            sum_signal = tf.zeros_like(original_signal[:, :, j])
-            ax[0, j].plot(original_signal[:, :, j].numpy().flatten())
+            sum_signal = tf.zeros_like(original_signal[:, :, j]).numpy().flatten()
+            os = original_signal[:, :, j].numpy().flatten()
+            if denosing:
+                os = denosing(os).out
+            ax[0, j].plot(os)
             ax[0, j].set_title("Original_{}".format(j + 1))
             for n in range(num_modals):
-                sum_signal += decomposed_signals[:, :, n + j * num_modals]
-                ax[2 + n, j].plot(decomposed_signals[:, :, n + j * num_modals].numpy().flatten())
+                ds = decomposed_signals[:, :, n + j * num_modals].numpy().flatten()
+                if denosing:
+                    ds = denosing(ds).out
+                sum_signal += ds
+                ax[2 + n, j].plot(ds)
                 ax[2 + n, j].set_title("Decomposed_{}_{}".format(j + 1, n + 1))
-            error = original_signal[:, :, j] - sum_signal
-            ax[1, j].plot(sum_signal.numpy().flatten(), color='m')
-            ax[1, j].plot(error.numpy().flatten(), color='c')
+            error = os - sum_signal
+            ax[1, j].plot(sum_signal, color='m')
+            ax[1, j].plot(error, color='c')
             ax[1, j].set_title('sum_error_{}'.format(j+1))
         if save_path:
             pass

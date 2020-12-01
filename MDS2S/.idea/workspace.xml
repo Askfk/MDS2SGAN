@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SignalProcessing/DPScripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/DPScripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SignalProcessing/EDA.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/EDA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ymScripts/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/ymScripts/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,7 +52,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.utils">
+  <component name="RunManager" selected="Python.DPScripts">
+    <configuration name="DPScripts" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MDS2S" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SignalProcessing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/DPScripts.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="config" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MDS2S" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,28 +111,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ymScripts/utils.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ymLosses" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="MDS2S" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ymScripts" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ymScripts/ymLosses.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -161,11 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.DPScripts" />
         <item itemvalue="Python.utils" />
         <item itemvalue="Python.ymMDS" />
         <item itemvalue="Python.ymSeq2seq" />
         <item itemvalue="Python.config" />
-        <item itemvalue="Python.ymLosses" />
       </list>
     </recent_temporary>
   </component>
@@ -192,7 +196,7 @@
       <workItem from="1604762069083" duration="62469000" />
       <workItem from="1606029842960" duration="10051000" />
       <workItem from="1606108764146" duration="15286000" />
-      <workItem from="1606212084368" duration="27561000" />
+      <workItem from="1606212084368" duration="28861000" />
     </task>
     <servers />
   </component>
@@ -220,6 +224,7 @@
     <SUITE FILE_PATH="coverage/MDS2S$backbone.coverage" NAME="backbone Coverage Results" MODIFIED="1606112155522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackBones" />
     <SUITE FILE_PATH="coverage/MDS2S$ymSeq2seq.coverage" NAME="ymSeq2seq Coverage Results" MODIFIED="1606469988098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
     <SUITE FILE_PATH="coverage/MDS2S$ymMDS.coverage" NAME="ymMDS Coverage Results" MODIFIED="1606648002056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MDS2S$DPScripts.coverage" NAME="DPScripts Coverage Results" MODIFIED="1606806547898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$MBConv.coverage" NAME="MBConv Coverage Results" MODIFIED="1604204728870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Scripts" />
     <SUITE FILE_PATH="coverage/MDS2S$ymLosses.coverage" NAME="ymLosses Coverage Results" MODIFIED="1606380649754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
     <SUITE FILE_PATH="coverage/MDS2S$F.coverage" NAME="F Coverage Results" MODIFIED="1605330557497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalPreprocessing" />
