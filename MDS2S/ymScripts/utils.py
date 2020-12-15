@@ -48,9 +48,7 @@ def download_trained_weights(cocovg_model_path, verbose=1):
 
 
 def download_dataset(dataset_path, verbose=1):
-    """Download COCO trained weights from Releases.
-
-    coco_model_path: local path of COCO trained weights
+    """Download lamb wave dataset from github release
     """
     if verbose > 0:
         print("Downloading dataset to " + dataset_path + " ...")
@@ -60,34 +58,45 @@ def download_dataset(dataset_path, verbose=1):
         print("... done downloading dataset!")
 
 
-def visualize_signals(signals, ax=None, figsize=(16, 16)):
+def visualize_signals(signals, axs=None, figsize=(25, 16), ylim=(-0.8, 0.8), show_batch=1):
     """
     Visualize signals sets by subpot
+    :param ylim:
+    :param show_batch:
+    :param figsize:
+    :param axs:
     :param signals:
     :return:
     """
 
-    n = signals.shape[0]
+    n = min(show_batch, signals.shape[0])
+    m = signals.shape[-1]  # channels
     plt.figure(figsize=figsize)
-    if not ax:
-        _, ax = plt.subplots(n, 1)
+    if not axs:
+        figure, axs = plt.subplots(m, n)
 
-    for i in range(n):
-        pass
+    for i in range(m):
+        for j in range(n):
+            ax = axs[i, j]
+            signal = signals[j, :, :, i].flatten()
+            ax.plot(signal)
+            ax.set_ylim(ylim)
+            ax.set_title("Batch {} Channel {}".format(j+1, i+1))
+
+    return axs
 
 
-def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsize=(25, 16), save_path=None,
+def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsize=(25, 20), save_path=None,
                                              num_modals=Config.NUM_MODALS, denosing=None, ylim=(-0.8, 0.8)):
     """
     Visualize the original multi-modals signal and its corresponding single-modal signals
 
     :param ylim:
-    :param denosing:
+    :param denosing: the way to denoise the signal if not None
     :param num_modals:
     :param multi: multi-modal signal
     :param single: single-modal signals
     :param show_batch:
-    :param ax:
     :param figsize:
     :param save_path: the path to save results
     """
@@ -102,14 +111,14 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsiz
         for j in range(signal_nums):
             sum_signal = tf.zeros_like(original_signal[:, :, j]).numpy().flatten()
             os = original_signal[:, :, j].numpy().flatten()
-            if denosing:
+            if denosing is not None:
                 os = denosing(os).out
             ax[0, j].plot(os)
             ax[0, j].set_title("Original_{}".format(j + 1))
             ax[0, j].set_ylim(ylim)
             for n in range(num_modals):
                 ds = decomposed_signals[:, :, n + j * num_modals].numpy().flatten()
-                if denosing:
+                if denosing is not None:
                     ds = denosing(ds).out
                 sum_signal += ds
                 ax[2 + n, j].plot(ds)
@@ -120,7 +129,9 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsiz
             ax[1, j].plot(error, color='c')
             ax[1, j].set_title('sum_error_{}'.format(j+1))
             ax[1, j].set_ylim(ylim)
-        if save_path:
+        if save_path is not None:
+
+            # TODO: Finish the way to save figures
             pass
 
     return figure, ax
@@ -129,6 +140,11 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsiz
 if __name__ == '__main__':
     import tensorflow as tf
 
-    original = tf.random.uniform([2, 96, 96, 3])
-    decomposed = tf.random.uniform([2, 96, 96, 12])
-    visualize_original_and_decomposed_modals(original, decomposed)
+    original = tf.random.uniform([2, 96, 96, 3]) - 0.5
+    decomposed = tf.random.uniform([2, 96, 96, 12]) - 0.5
+    visualize_signals(original.numpy(), show_batch=2)
+    plt.show()
+
+
+
+    # visualize_original_and_decomposed_modals(original, decomposed)

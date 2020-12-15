@@ -94,6 +94,18 @@ def discriminator_loss_graph(pred_pred_class, gt_class, pred_gt_class=None,
     return final_loss
 
 
+def transformer_loss_graph(pred, gt,
+                           loss_func=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True, reduction='none')):
+
+    mask = tf.math.logical_not(tf.math.equal(gt, 0))
+    loss_ = loss_func(gt, pred)
+
+    mask = tf.cast(mask, dtype=loss_.dtype)
+    loss_ *= mask
+
+    return tf.reduce_sum(loss_) / tf.reduce_sum(mask)
+
+
 if __name__ == '__main__':
     test_data = tf.random.uniform([6, 96, 96, 12])
     test_gt = tf.random.uniform([6, 96, 96, 3])

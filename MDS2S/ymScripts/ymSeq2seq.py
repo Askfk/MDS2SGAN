@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 
 from .ymLayers import BatchNorm, FixedDropout, DilatedConv2d
 from .ymActivations import swish, relu, leakyRelu
@@ -15,11 +16,10 @@ def customStrides(n):
 
 class Encoder(tf.keras.Model):
     """
-
     input shape: [batch, 96， 96， 3]
     """
 
-    def __init__(self, config, prefix='encoder', **kwargs):
+    def __init__(self, config, prefix='encoder_cnn', **kwargs):
         super(Encoder, self).__init__(**kwargs)
         self.config = config
         self.repeat_times = config.ENCODER_REPEAT
@@ -54,7 +54,7 @@ class Encoder(tf.keras.Model):
 
     def build_model(self, input_tensor):
         outputs = self.call(input_tensor)
-        return tf.keras.Model(input_tensor, outputs, name='MDS_encoder')
+        return tf.keras.Model(input_tensor, outputs, name=self.prefix)
 
 
 class Middle(tf.keras.Model):
@@ -62,7 +62,7 @@ class Middle(tf.keras.Model):
     Middle part between Encoder and Decoder
     """
 
-    def __init__(self, config, prefix='Middle', **kwargs):
+    def __init__(self, config, prefix='Middle_cnn', **kwargs):
         super(Middle, self).__init__(**kwargs)
 
         self.config = config
@@ -122,7 +122,7 @@ class Decoder(tf.keras.Model):
     output shape: [batch, config.SIGNAL_FREQ, config.SIGNAL_PERIOD, config.NUM_STATUS]
     """
 
-    def __init__(self, config, prefix='decoder', **kwargs):
+    def __init__(self, config, prefix='decoder_cnn', **kwargs):
         super(Decoder, self).__init__(**kwargs)
         self.config = config
         self.prefix = prefix
@@ -153,18 +153,17 @@ class Decoder(tf.keras.Model):
         x = self.bn2(x, training=training)
         x = self.deconv3(x)
 
-
         return x
 
     def build_model(self, input_tensors):
         outputs = self.call(input_tensors)
-        return tf.keras.Model(input_tensors, outputs, name='MDS_decoder')
+        return tf.keras.Model(input_tensors, outputs, name=self.prefix)
 
 
 # build encoder backbones
 def get_encoders_graph(config, input_tensor=None):
     if config.ENCODER_BACKBONE == 'custom':
-        encoder = Encoder(config, prefix='encoder')
+        encoder = CNNEncoder(config, prefix='encoder')
         if input_tensor:
             return encoder.build_model(input_tensor)
         return encoder
@@ -175,7 +174,7 @@ def get_encoders_graph(config, input_tensor=None):
 # build decoder backbones
 def get_decoders_graph(config, input_tensor=None):
     if config.DECODER_BACKBONE == 'custom':
-        decoder = Decoder(config, prefix='decoder')
+        decoder = CNNDecoder(config, prefix='decoder')
         if input_tensor:
             return decoder.build_model(input_tensor)
         return decoder

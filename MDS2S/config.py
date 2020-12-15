@@ -7,6 +7,10 @@ class Config(object):
     SIGNAL_FREQ = 96
     SIGNAL_PERIOD = 96
 
+    # STFT params
+    WINDOW = 95
+    STEP_SIZE = 96
+
     AMPLIFIER = 1
 
     # The num of status of welding lines, one-hot encode
@@ -14,6 +18,9 @@ class Config(object):
 
     # The num of mode status of lamb wave
     NUM_MODALS = 3
+
+    # The num of sensor when collecting the data
+    NUM_SENSORS = 3
 
     NAME = None
 

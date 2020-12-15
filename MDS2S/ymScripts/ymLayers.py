@@ -105,4 +105,35 @@ class DepthwiseConv2d(tf.keras.layers.Layer):
         return out
 
 
+class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
+
+    def __init__(self, epochs, warmup_steps=4000):
+        super(CustomSchedule, self).__init__()
+
+        self.epochs = epochs
+        self.epochs = tf.cast(self.epochs, tf.float32)
+
+        self.warmup_steps = warmup_steps
+
+    def __call__(self, step):
+        arg1 = tf.math.rsqrt(step)
+        arg2 = step * (self.warmup_steps ** -1.5)
+
+        return tf.math.rsqrt(self.epochs) * tf.math.minimum(arg1, arg2)
+
+
+if __name__ == '__main__':
+    import matplotlib.pyplot as plt
+
+    temp_learning_rate_schedule = CustomSchedule(400)
+
+    plt.plot(temp_learning_rate_schedule(tf.range(40000, dtype=tf.float32)))
+    plt.ylabel('Learning Rate')
+    plt.xlabel('Train Step')
+    plt.show()
+
+
+
+
+
 
