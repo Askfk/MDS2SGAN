@@ -315,7 +315,7 @@ class Transformer(tf.keras.Model):
 
         self.final_layer = tf.keras.layers.Dense(config.NUM_MODALS * 3)
 
-    def call(self, inp, training, enc_padding_mask, look_ahead_mask, dec_padding_mask):
+    def call(self, inp, training, enc_padding_mask=None, look_ahead_mask=None, dec_padding_mask=None):
 
         enc_output = self.encoder(inp, training, enc_padding_mask)  # [batch_size, inp_seq_len, d_model]
 
