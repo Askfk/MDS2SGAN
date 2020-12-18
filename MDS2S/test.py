@@ -268,4 +268,3 @@
 # head = ListNode(1, head)
 # s = Solution()
 # s.test(head, 3)
-

@@ -7,7 +7,7 @@ import tensorflow as tf
 
 from config import Config as config
 
-from ymScripts.utils import visualize_signals
+from .ymScripts.utils import visualize_signals
 
 # from .EDA import autoEDA
 # from .EMD import autoEMD

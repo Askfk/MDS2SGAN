@@ -163,7 +163,7 @@ class Decoder(tf.keras.Model):
 # build encoder backbones
 def get_encoders_graph(config, input_tensor=None):
     if config.ENCODER_BACKBONE == 'custom':
-        encoder = CNNEncoder(config, prefix='encoder')
+        encoder = Encoder(config, prefix='encoder')
         if input_tensor:
             return encoder.build_model(input_tensor)
         return encoder
@@ -174,7 +174,7 @@ def get_encoders_graph(config, input_tensor=None):
 # build decoder backbones
 def get_decoders_graph(config, input_tensor=None):
     if config.DECODER_BACKBONE == 'custom':
-        decoder = CNNDecoder(config, prefix='decoder')
+        decoder = Decoder(config, prefix='decoder')
         if input_tensor:
             return decoder.build_model(input_tensor)
         return decoder
