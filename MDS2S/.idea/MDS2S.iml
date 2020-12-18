@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ymScripts" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BackBones" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SignalProcessing" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.6 (PycharmProjects)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
