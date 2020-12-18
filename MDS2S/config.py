@@ -12,6 +12,7 @@ class Config(object):
     # STFT params
     WINDOW = 95
     STEP_SIZE = 96
+    USE_STFT = False
 
     AMPLIFIER = 1
 
@@ -24,8 +25,10 @@ class Config(object):
     # The num of sensor when collecting the data
     NUM_SENSORS = 3
 
+    # Name of the model
     NAME = None
 
+    # Seq2seq hyper parameters
     ENCODER_BACKBONE = 'custom'
     DECODER_BACKBONE = 'custom'
 
