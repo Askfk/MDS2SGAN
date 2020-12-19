@@ -195,10 +195,10 @@ def prepareTrainData(inputs, label):
 
             freq_domain_res = tf.abs(tf.signal.stft(res, frame_length=config.WINDOW,
                                                     frame_step=config.STEP_SIZE))
-            # freq_width_padding = (config.SIGNAL_FREQ - freq_domain_res.shape[0])
-            # freq_height_padding = (config.SIGNAL_FREQ - freq_domain_res.shape[1])
-            freq_width_padding = 0
-            freq_height_padding = 0
+            freq_width_padding = (config.SIGNAL_FREQ - freq_domain_res.shape[0])
+            freq_height_padding = (config.SIGNAL_FREQ - freq_domain_res.shape[1])
+            # freq_width_padding = 0
+            # freq_height_padding = 0
             freq_domain_res = tf.pad(tensor=freq_domain_res,
                                      paddings=[(0, freq_width_padding), (0, freq_height_padding)],
                                      constant_values=0)[..., tf.newaxis]
@@ -208,10 +208,10 @@ def prepareTrainData(inputs, label):
 
             freq_domain_temp_res = tf.abs(tf.signal.stft(temp_res, frame_length=config.WINDOW,
                                                          frame_step=config.STEP_SIZE))
-            # freq_width_padding = (config.SIGNAL_FREQ - freq_domain_temp_res.shape[0])
-            # freq_height_padding = (config.SIGNAL_FREQ - freq_domain_temp_res.shape[1])
-            freq_width_padding = 0
-            freq_height_padding = 0
+            freq_width_padding = (config.SIGNAL_FREQ - freq_domain_temp_res.shape[0])
+            freq_height_padding = (config.SIGNAL_FREQ - freq_domain_temp_res.shape[1])
+            # freq_width_padding = 0
+            # freq_height_padding = 0
             freq_domain_temp_res = tf.pad(tensor=freq_domain_temp_res,
                                           paddings=[(0, freq_width_padding), (0, freq_height_padding)],
                                           constant_values=0)[..., tf.newaxis]
