@@ -42,7 +42,7 @@ def create_look_ahead_mask(size):
     return mask
 
 
-def scaled_dot_product_attention(q, k, v, mask):
+def scaled_dot_product_attention(q, k, v, mask, profix='sdpa'):
     """Calculate the attention weights.
       q, k, v must have matching leading dimensions.
       k, v must have matching penultimate dimension, i.e.: seq_len_k = seq_len_v.
@@ -61,7 +61,7 @@ def scaled_dot_product_attention(q, k, v, mask):
       """
 
     # [batch, num_heads, hq, wq, wk]
-    matmul_qk = tf.matmul(q, k, transpose_b=True)  # (..., seq_len_q, sen_len_k)
+    matmul_qk = tf.matmul(q, k, transpose_b=True, name=profix+'_matmul_qk')  # (..., seq_len_q, sen_len_k)
 
     # scale matmul_qk
     dk = tf.cast(tf.shape(k)[-1], tf.float32)
@@ -78,7 +78,7 @@ def scaled_dot_product_attention(q, k, v, mask):
     # assert wk == wv
 
     # (batch, num_heads, hq, wq, depth)
-    output = tf.matmul(attention_weights, v)
+    output = tf.matmul(attention_weights, v, name=profix+'_matmul_attn_v')
 
     return output, attention_weights
 
@@ -94,20 +94,21 @@ def print_out(q, k, v):
 
 class MultiHeadAttention(tf.keras.layers.Layer):
 
-    def __init__(self, d_model, num_heads, **kwargs):
+    def __init__(self, d_model, num_heads, profix='MHA', **kwargs):
         super(MultiHeadAttention, self).__init__(**kwargs)
         self.num_heads = num_heads
         self.d_model = d_model
+        self.profix = profix
 
         assert d_model % self.num_heads == 0
 
         self.depth = d_model // self.num_heads
 
-        self.wq = tf.keras.layers.Dense(d_model)
-        self.wk = tf.keras.layers.Dense(d_model)
-        self.wv = tf.keras.layers.Dense(d_model)
+        self.wq = tf.keras.layers.Dense(d_model, name=profix+"_mha_wq")
+        self.wk = tf.keras.layers.Dense(d_model, name=profix+"_mha_wk")
+        self.wv = tf.keras.layers.Dense(d_model, name=profix+"_mha_wv")
 
-        self.dense = tf.keras.layers.Dense(d_model)
+        self.dense = tf.keras.layers.Dense(d_model, name=profix+"_mha_dense")
 
     def split_heads(self, x, batch_size):
         """Split the last dimension into (num_heads, depth).
@@ -135,10 +136,10 @@ class MultiHeadAttention(tf.keras.layers.Layer):
 
         # scaled_attention.shape == (batch_size, num_heads, seq_len_q, depth) / (batch, num_heads, hq, wq, depth)
         # attention_weights.shape == (batch_size, num_heads, seq_len_q, seq_len_k) / (batch, num_heads, hq, wq, wk)
-        scaled_attention, attention_weights = scaled_dot_product_attention(q, k, v, mask)
+        scaled_attention, attention_weights = scaled_dot_product_attention(q, k, v, mask, profix=self.profix)
 
         # (batch_size, seq_len_q, num_heads, depth) / (batch, hq, wq, num_heads, depth)
-        scaled_attention = tf.transpose(scaled_attention, perm=[0, 2, 3, 1, 4])
+        scaled_attention = tf.transpose(scaled_attention, perm=[0, 2, 3, 1, 4], name=self.profix+'_scaled_attention')
 
         temp_shape = scaled_attention.shape
         # (batch_size, seq_len_q, d_model) / (batch, hq, wq, d_model)
@@ -149,20 +150,21 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         return output, attention_weights
 
 
-def point_wise_feed_forward_network(d_model, dff):
+def point_wise_feed_forward_network(d_model, dff, profix='pwffn'):
     return tf.keras.Sequential([
-        tf.keras.layers.Dense(dff, activation='relu'),  # (batch_size, seq_len, dff)
-        tf.keras.layers.Dense(d_model)  # (batch_size, seq_len, d_model)
+        tf.keras.layers.Dense(dff, activation='relu', name=profix+'_dense1'),  # (batch_size, seq_len, dff)
+        tf.keras.layers.Dense(d_model, name=profix+'_dense2')  # (batch_size, seq_len, d_model)
     ])
 
 
 class EncoderLayer(tf.keras.layers.Layer):
 
-    def __init__(self, d_model, num_heads, dff, rate=0.1):
+    def __init__(self, d_model, num_heads, dff, profix='encoder_layer', rate=0.1):
         super().__init__()
+        self.profix = profix
 
-        self.mha = MultiHeadAttention(d_model, num_heads)
-        self.ffn = point_wise_feed_forward_network(d_model, dff)
+        self.mha = MultiHeadAttention(d_model, num_heads, profix=self.profix+"_mha")
+        self.ffn = point_wise_feed_forward_network(d_model, dff, profix=self.profix+'_pwffn')
 
         self.layernorm1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
         self.layernorm2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
@@ -191,13 +193,14 @@ class DecoderLayer(tf.keras.layers.Layer):
 
     # TODO: check out whether decoder layer needs x as input or just the output of encoder as input.
 
-    def __init__(self, d_model, num_heads, dff, rate=0.1):
+    def __init__(self, d_model, num_heads, dff, profix='decoder_layer', rate=0.1):
         super().__init__()
+        self.profix = profix
 
-        self.mha1 = MultiHeadAttention(d_model, num_heads)
-        self.mha2 = MultiHeadAttention(d_model, num_heads)
+        self.mha1 = MultiHeadAttention(d_model, num_heads, profix=self.profix+'_mha1')
+        self.mha2 = MultiHeadAttention(d_model, num_heads, profix=self.profix+'_mha2')
 
-        self.ffn = point_wise_feed_forward_network(d_model, dff)
+        self.ffn = point_wise_feed_forward_network(d_model, dff, profix=self.profix+'_pwffn')
 
         self.layernorm1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
         self.layernorm2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
@@ -236,19 +239,20 @@ class Encoder(tf.keras.layers.Layer):
     pos_encoding: (batch
     """
 
-    def __init__(self, num_layers, d_model, num_heads, dff,
-                 maximum_position_encoding, rate=0.1):
+    def __init__(self, num_layers, d_model, num_heads, dff, profix='Encoder', rate=0.1):
         super(Encoder, self).__init__()
 
         self.d_model = d_model
         self.num_layers = num_layers
+        self.profix = profix
 
         # self.embedding = tf.keras.layers.Embedding(input_vocab_size, d_model)
-        self.embedding = tf.keras.layers.Dense(d_model)
+        self.embedding = tf.keras.layers.Dense(d_model, name=self.profix+'_embedding')
 
         # TODO: Adjust the out shape of pos_encoding or check the necessaries of pos encoding
-        self.pos_encoding = positional_encoding(maximum_position_encoding, self.d_model)
-        self.enc_layers = [EncoderLayer(d_model, num_heads, dff, rate) for _ in range(num_layers)]
+        # self.pos_encoding = positional_encoding(maximum_position_encoding, self.d_model)
+        self.enc_layers = [EncoderLayer(d_model, num_heads, dff, profix=self.profix+'_layer{}'.format(i+1), rate=rate)
+                           for i in range(num_layers)]
         self.dropout = tf.keras.layers.Dropout(rate)
 
     def call(self, x, training, mask):
@@ -270,17 +274,18 @@ class Encoder(tf.keras.layers.Layer):
 
 class Decoder(tf.keras.layers.Layer):
 
-    def __init__(self, num_layers, d_model, num_heads, dff,
-                 maximum_position_encoding, rate=0.1):
+    def __init__(self, num_layers, d_model, num_heads, dff, profix='Decoder', rate=0.1):
         super(Decoder, self).__init__()
 
         self.d_model = d_model
         self.num_layers = num_layers
+        self.profix = profix
 
         # self.embedding = tf.keras.layers.Embedding(target_vocab_size, d_model)
-        self.pos_encoding = positional_encoding(maximum_position_encoding, d_model)
+        # self.pos_encoding = positional_encoding(maximum_position_encoding, d_model)
 
-        self.dec_layers = [DecoderLayer(d_model, num_heads, dff, rate) for _ in range(num_layers)]
+        self.dec_layers = [DecoderLayer(d_model, num_heads, dff, profix=self.profix+'_layer{}'.format(i+1), rate=rate)
+                           for i in range(num_layers)]
         self.dropout = tf.keras.layers.Dropout(rate)
 
     def call(self, enc_output, training, look_ahead_mask, padding_mask):
@@ -306,12 +311,14 @@ class Decoder(tf.keras.layers.Layer):
 
 class Transformer(tf.keras.Model):
 
-    def __init__(self, num_layers, d_model, num_heads, dff, pe_input=None, pe_target=None, rate=0.1):
+    def __init__(self, num_layers, d_model, num_heads, dff, profix='Transformer', rate=0.1):
         super(Transformer, self).__init__()
 
-        self.encoder = Encoder(num_layers, d_model, num_heads, dff, pe_input, rate)
+        self.profix = profix
 
-        self.decoder = Decoder(num_layers, d_model, num_heads, dff, pe_target, rate)
+        self.encoder = Encoder(num_layers, d_model, num_heads, dff, profix=self.profix+"_Encoder", rate=rate)
+
+        self.decoder = Decoder(num_layers, d_model, num_heads, dff, profix=self.profix+'_Decoder', rate=rate)
 
         self.final_layer = tf.keras.layers.Dense(config.NUM_MODALS * 3)
 
@@ -329,7 +336,7 @@ class Transformer(tf.keras.Model):
 
 if __name__ == '__main__':
     test_tensor = tf.random.normal([1, 96, 96, 3])
-    transformer = Transformer(num_layers=1, d_model=256, num_heads=8, dff=1024, pe_input=96, pe_target=96)
+    transformer = Transformer(num_layers=1, d_model=256, num_heads=8, dff=1024)
     final_output, attention_weights = transformer(test_tensor, False, None, None, None)
     print(final_output.shape)
     print(attention_weights)

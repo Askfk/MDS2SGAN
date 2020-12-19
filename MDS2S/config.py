@@ -5,7 +5,7 @@ class Config(object):
 
     MDS = 'seq2seq'  # seq2seq or transformer
 
-    BATCH_SIZE = 6
+    BATCH_SIZE = 4
     SIGNAL_FREQ = 96
     SIGNAL_PERIOD = 96
 
