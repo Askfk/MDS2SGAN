@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymScripts/ymTransformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/ymScripts/ymTransformer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -199,7 +197,7 @@
       <workItem from="1607145567894" duration="2073000" />
       <workItem from="1607229502056" duration="3628000" />
       <workItem from="1607484590312" duration="16364000" />
-      <workItem from="1607850317720" duration="28394000" />
+      <workItem from="1607850317720" duration="29066000" />
     </task>
     <servers />
   </component>

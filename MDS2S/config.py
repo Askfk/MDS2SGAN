@@ -55,7 +55,8 @@ class Config(object):
 
     VERSION = 0.1
 
-    LOSS_WEIGHTS = {}
+    LOSS_WEIGHTS = {'custom': 100,
+                    'transformer': 10}
 
     # Train or freeze batch normalization layers
     #     None: Train BN layers. This is the normal mode
