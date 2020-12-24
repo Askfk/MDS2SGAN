@@ -20,7 +20,7 @@ class Config(object):
     NUM_CLASSES = 6
 
     # The num of mode status of lamb wave
-    NUM_MODALS = 3
+    NUM_MODALS = 7
 
     # The num of sensor when collecting the data
     NUM_SENSORS = 3

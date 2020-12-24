@@ -63,11 +63,12 @@ class MDS(tf.keras.Model):
 class DCM(tf.keras.Model):
     """Discriminator Classifier Model"""
 
-    def __init__(self, config, prefix='', **kwargs):
+    def __init__(self, config, prefix='', localization=False, **kwargs):
         super(DCM, self).__init__(**kwargs)
         self.prefix = prefix + '_'
         self.repeat_times = config.DCM_REPEAT
         self.config = config
+        self.localization = localization
 
         # Output: [batch, 2000, 2000, 16]
         self.conv1 = tf.keras.layers.Conv2D(16, (3, 3), padding='same', kernel_regularizer='l1_l2', name=self.prefix + 'conv1')
@@ -108,7 +109,7 @@ class DCM(tf.keras.Model):
             #                  name=self.prefix + 'dropout{}'.format(i + 1))(x)
 
         # TODO: Find out whether need to squeeze the feature maps before passing them into dense layer.
-
+        # TODO: Add localization part if self.localization is True
         # Flatten x,
         x = tf.keras.layers.Flatten()(x)
         logits = self.final_dense(x)
