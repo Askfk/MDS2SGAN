@@ -25,6 +25,10 @@ class Config(object):
     # The num of sensor when collecting the data
     NUM_SENSORS = 3
 
+    # The localization area
+    LOCAL_HEIGHT = 80
+    LOCAL_WIDTH = 110
+
     # Name of the model
     NAME = None
 

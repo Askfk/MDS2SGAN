@@ -23,8 +23,8 @@ def sifting(data):
 
 
 def hasPeaks(data):
-    max_peaks = list(argrelextrema(data, np.greater)[0])
-    min_peaks = list(argrelextrema(data, np.less)[0])
+    max_peaks = list(set(argrelextrema(data, np.greater)[0]))
+    min_peaks = list(set(argrelextrema(data, np.less)[0]))
 
     if len(max_peaks) > 3 and len(min_peaks) > 3:
         return True
@@ -34,9 +34,11 @@ def hasPeaks(data):
 
 # 判断IMFs
 def isIMFs(data):
-    max_peaks = list(argrelextrema(data, np.greater)[0])
-    min_peaks = list(argrelextrema(data, np.less)[0])
-
+    max_peaks = list(set(argrelextrema(data, np.greater)[0]))
+    print("Done max: {}".format(len(max_peaks)))
+    min_peaks = list(set(argrelextrema(data, np.less)[0]))
+    print("Done min: {}".format(len(min_peaks)))
+    print(data[max_peaks].shape)
     if min(data[max_peaks]) < 0 or max(data[min_peaks]) > 0:
         return False
     else:
@@ -46,23 +48,27 @@ def isIMFs(data):
 def getIMFs(data):
     while not isIMFs(data):
         data = sifting(data)
+        print("LOOPING....")
+    print("Done getIMF")
     return data
 
 
 # EMD function
-def EMD(data):
+def EMD(data, num=8):
     IMFs = []
-    while hasPeaks(data):
+    i = 0
+    while hasPeaks(data) or i < num:
         data_imf = getIMFs(data)
         data = data - data_imf
         IMFs.append(data_imf)
+        i += 1
     return IMFs
 
 
-def autoEMD(data, figsize=(18, 25)):
-    n = len(data) - 2
-    for j in range(n):
-        IMFs = EMD(data[j])
+def autoEMD(data, figsize=(18, 25), num=8):
+    l = len(data)
+    for j in range(l):
+        IMFs = EMD(data[j], num=num)
         n = len(IMFs) + 1
 
         # 原始信号
@@ -97,3 +103,23 @@ def autoEMD(data, figsize=(18, 25)):
         # plt.legend()
         plt.xlabel('time (s)')
         plt.show()
+
+
+if __name__ == '__main__':
+    import scipy.io as scio
+    import os
+
+    ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
+
+    file_names = os.listdir(ROOT_DIR)
+    print(file_names[0])
+    fn = os.path.join(ROOT_DIR, file_names[0])
+
+    data = scio.loadmat(fn)
+
+    data = list(data.values())[6:12]
+    imf = sifting(data[0])
+    print("Done sifting: {}".format(imf.shape))
+    imf = isIMFs(imf)
+    print(imf)
+

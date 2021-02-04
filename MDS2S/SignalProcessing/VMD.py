@@ -160,10 +160,7 @@ def VMD(f, alpha, tau, K, DC, init, tol):
 
 def autoVMD(data, alpha=500, tau=0., K=3, DC=0, init=1, tol=1e-7):
     # Time Domain 0 to T
-    freq = data[-2]
-    num_points = data[-1]
-    time_domain = np.arange(0, num_points / freq, 1 / freq)
-    m = len(data) - 2
+    m = len(data)
     for j in range(m):
         signal = data[j]
 
@@ -175,21 +172,21 @@ def autoVMD(data, alpha=500, tau=0., K=3, DC=0, init=1, tol=1e-7):
 
         n = len(u)
         plt.subplot(n + 2, 1, 1)
-        plt.plot(time_domain, signal)
+        plt.plot(signal)
         plt.title('original')
 
         combined = 0
 
         for i in range(n):
             plt.subplot(n + 2, 1, i + 3)
-            plt.plot(time_domain, u[i])
+            plt.plot(u[i])
             combined += u[i]
 
             plt.title('Decomposed modes_{}'.format(i + 1))
 
         plt.subplot(n + 2, 1, 2)
-        plt.plot(time_domain, combined)
-        plt.plot(time_domain, combined - np.array(signal))
+        plt.plot(combined)
+        plt.plot(combined - np.array(signal))
         plt.title('combined')
         plt.show()
 

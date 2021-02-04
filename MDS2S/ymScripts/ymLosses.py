@@ -67,7 +67,7 @@ def generator_loss_graph(predictions, ground_truth, amplifier=Config.AMPLIFIER, 
     return final_loss
 
 
-def discriminator_loss_graph(pred_pred_class, gt_class, pred_gt_class=None,
+def discriminator_classify_loss_graph(pred_pred_class, gt_class, pred_gt_class=None,
                              loss_func=tf.keras.losses.categorical_crossentropy):
     """As designed, please refer to
     https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/generative/dcgan.ipynb#scrollTo=k6qC-SbjK0yW
@@ -92,6 +92,15 @@ def discriminator_loss_graph(pred_pred_class, gt_class, pred_gt_class=None,
     final_loss = K.switch(tf.math.is_nan(loss), 0, loss)
 
     return final_loss
+
+
+def discriminator_localize_loss_graph(pred_localization, gt_localization, loss_func=tf.keras.losses.MSE):
+
+    pred_localization = tf.reshape(pred_localization, [-1, Config.LOCAL_HEIGHT, Config.LOCAL_WIDTH])
+
+    loss = K.mean(loss_func(gt_localization, pred_localization))
+
+    return K.switch(tf.math.is_nan(loss), 0, loss)
 
 
 def transformer_loss_graph(pred, gt,

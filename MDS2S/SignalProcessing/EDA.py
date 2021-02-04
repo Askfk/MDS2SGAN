@@ -293,14 +293,14 @@ class KatzFractalDimension:
 
 def autoEDA(data, figsize=(16, 16)):
 
-    sampling_rate = data[-2]
-    number_data_points = data[-1]
+    sampling_rate = 24
+    number_data_points = 10000
 
     resolution = [sampling_rate * 3, sampling_rate * 3]
 
     time_domain = np.arange(1 / sampling_rate, (number_data_points + 1) / sampling_rate, 1 / sampling_rate)
-    _, ax = plt.subplots(4, 2, figsize=figsize)
-    for i in range(len(data) - 2):
+    _, ax = plt.subplots(4, len(data), figsize=figsize)
+    for i in range(len(data)):
         ax[0, i].plot(time_domain, data[i], color='seagreen')
         ax[0, i].set_title('s1_{}_original'.format(i + 1), fontsize=24)
         ax[1, i].plot(time_domain, average_smoothing(data[i]), color='red')

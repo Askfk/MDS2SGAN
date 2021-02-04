@@ -87,7 +87,8 @@ class DCM(tf.keras.Model):
         # self.bn2 = BatchNorm()
         # self.dp2 = FixedDropout(0.3, noise_shape=(None, 1, 1, 1), name=self.prefix + 'drop2')
 
-        self.final_dense = tf.keras.layers.Dense(self.config.NUM_CLASSES)
+        self.class_final_dense = tf.keras.layers.Dense(self.config.NUM_CLASSES)
+        self.localization_final_dense = tf.keras.layers.Dense(self.config.LOCAL_WIDTH * self.config.LOCAL_HEIGHT)
         self.softmax = tf.keras.layers.Activation('softmax')
 
     def call(self, inputs, training=False):
@@ -112,9 +113,11 @@ class DCM(tf.keras.Model):
         # TODO: Add localization part if self.localization is True
         # Flatten x,
         x = tf.keras.layers.Flatten()(x)
-        logits = self.final_dense(x)
-        out = self.softmax(logits)
-        return logits, out
+        classify_logits = self.class_final_dense(x)
+        localize_logits = self.localization_final_dense(x)
+        class_out = self.softmax(logits)
+        localize_out = self.softmax(localize_logits)
+        return classify_logits, localize_logits, class_out, localize_out
 
     def build_model(self, input_tensors):
         outputs = self.call(input_tensors, self.config.TRAIN_BN)

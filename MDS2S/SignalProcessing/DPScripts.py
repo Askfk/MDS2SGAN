@@ -18,6 +18,21 @@ from ..ymScripts.utils import visualize_signals
 ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/all'
 
 
+def generate_location_labels(height=3, width=10, name=''):
+    ROOT = "/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/loaction_labels"
+    save_path = os.path.join(ROOT, name + '.txt')
+    f = open(save_path, 'w')
+    f.close()
+    labels = np.zeros([height, width])
+    print("Enter y1 & y2:")
+    [y1, y2] = list(map(int, input().split()))
+    print("Enter x1 & x2:")
+    [x1, x2] = list(map(int, input().split()))
+
+    labels[y1:y2, x1:x2] = 1
+    np.savetxt(save_path, labels)
+
+
 def getData(file_path):
     """
     Read data from mat file

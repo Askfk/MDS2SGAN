@@ -4,7 +4,7 @@ import os
 import matplotlib.pyplot as plt
 
 
-ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/all'
+ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
 
 
 def getData(file_path):
@@ -82,22 +82,23 @@ def plot_signal_decomp(data, w, title, level=7):
         ax.set_ylabel("D%d" % (i + 1))
 
 
-def show_and_pick():
+def auto_wavelet(data, figsize=(25, 16)):
     pass
 
 
-file_names = os.listdir(ROOT_DIR)
+def show_and_pick():
+    pass
 
-for i in range(5):
-    fn = file_names[i]
-
-    data_path = os.path.join(ROOT_DIR, fn)
-    data = scio.loadmat(data_path)['exportData']
-    s1_1 = data[0][0][0][0]
-
-    plot_signal_decomp(s1_1, 'coif5', fn, level=9)
-# plot_signal_decomp(data2, 'sym5',
-#          "DWT: Frequency and phase change - Symmlets5")
-# plot_signal_decomp(s1_1, 'sym5', "DWT: Ecg sample - Symmlets5")
-
-    plt.show()
+#
+# file_names = os.listdir(ROOT_DIR)
+#
+# for i in range(2):
+#     fn = file_names[i]
+#
+#     data_path = os.path.join(ROOT_DIR, fn)
+#     data = scio.loadmat(data_path)
+#     s0 = data['s0']
+#
+#     plot_signal_decomp(s0, 'coif5', fn, level=5)
+#
+#     plt.show()
