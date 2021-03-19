@@ -2,6 +2,9 @@ import pywt
 import scipy.io as scio
 import os
 import matplotlib.pyplot as plt
+from EDA import WaveletDenoising
+import numpy as np
+from TheRealEDA import FrequencyAnalysis, get_damage
 
 
 ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
@@ -36,7 +39,7 @@ def getData(file_path):
 mode = pywt.Modes.smooth
 
 
-def plot_signal_decomp(data, w, title, level=7):
+def plot_signal_decomp(t, data, w, title, level=9):
     """Decompose and plot a signal S.
     S = An + Dn + Dn-1 + ... + D1
     """
@@ -51,6 +54,7 @@ def plot_signal_decomp(data, w, title, level=7):
 
     rec_a = []
     rec_d = []
+    nt = len(t)
 
     for i, coeff in enumerate(ca):
         coeff_list = [coeff, None] + [None] * i
@@ -58,47 +62,54 @@ def plot_signal_decomp(data, w, title, level=7):
 
     for i, coeff in enumerate(cd):
         coeff_list = [None, coeff] + [None] * i
-        if i == 3:
-            print(len(coeff))
-            print(len(coeff_list))
         rec_d.append(pywt.waverec(coeff_list, w))
 
-    fig = plt.figure(figsize=(16, 9))
+    return rec_d
+
+    fig = plt.figure(figsize=(9, 12))
     ax_main = fig.add_subplot(len(rec_a) + 1, 1, 1)
     ax_main.set_title(title)
-    ax_main.plot(data)
-    ax_main.set_xlim(0, len(data) - 1)
+    ax_main.plot(t, data)
 
     for i, y in enumerate(rec_a):
         ax = fig.add_subplot(len(rec_a) + 1, 2, 3 + i * 2)
-        ax.plot(y, 'r')
-        ax.set_xlim(0, len(y) - 1)
+        ax.plot(t, y[:nt], 'r')
+
         ax.set_ylabel("A%d" % (i + 1))
 
     for i, y in enumerate(rec_d):
         ax = fig.add_subplot(len(rec_d) + 1, 2, 4 + i * 2)
-        ax.plot(y, 'g')
-        ax.set_xlim(0, len(y) - 1)
+        ax.plot(t, y[:nt], 'g')
+
         ax.set_ylabel("D%d" % (i + 1))
+    recd = list(map(lambda x: x[:nt], rec_d))
+    return recd
 
 
-def auto_wavelet(data, figsize=(25, 16)):
-    pass
+if __name__ == '__main__':
+    file_names = os.listdir(ROOT_DIR)
+
+    file_name = '165-24-10000-400-6500-20-n.mat'
+
+    data_path = os.path.join(ROOT_DIR, file_name)
+
+    data = scio.loadmat(data_path)
+    s1 = data['s1'][:, 0]
+    d = WaveletDenoising(s1).out[700:3500]
+    t = np.arange(0, 10000 / 24000, 1 / 24000)
 
 
-def show_and_pick():
-    pass
+    rec_d = plot_signal_decomp(t[700:3500], d, 'coif5', 'Wavelet', level=6)
 
-#
-# file_names = os.listdir(ROOT_DIR)
-#
-# for i in range(2):
-#     fn = file_names[i]
-#
-#     data_path = os.path.join(ROOT_DIR, fn)
-#     data = scio.loadmat(data_path)
-#     s0 = data['s0']
-#
-#     plot_signal_decomp(s0, 'coif5', fn, level=5)
-#
-#     plt.show()
+    plt.figure(figsize=(9, 6))
+    for i in range(2):
+        plt.subplot(3, 1, i+1)
+        plt.plot(t[700:3500], rec_d[-(i+1)][:2800])
+        # plt.title("模态分量 {}".format(i+1))
+        d = d[:2800] - rec_d[-(i+1)][:2800]
+    plt.subplot(3, 1, 3)
+    plt.plot(t[700:3500], d[:2800])
+    # plt.title("噪声模态分量")
+
+    plt.show()
+

@@ -12,7 +12,7 @@ from scipy.signal import argrelextrema
 from scipy import interpolate as spi
 
 from PyEMD import EMD, EEMD, Visualisation
-from ..config import Config as cfg
+from config import Config as cfg
 
 DATA_ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
 LABEL_ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/labels'
@@ -71,7 +71,7 @@ class TimeAnalysis:
         for k in self.damage.keys():
             temp = []
             if len(k.split('-')[-1]) < 3:
-                data = scio.loadmat(os.path.join(DATA_ROOT_DIR, damage[k][0] + '.mat'))
+                data = scio.loadmat(os.path.join(DATA_ROOT_DIR, self.damage[k][0] + '.mat'))
             else:
                 params = self.damage[k][0].split('-')
                 name = ''
@@ -96,7 +96,7 @@ class TimeAnalysis:
         :return:
         """
         classes = np.arange(len(self.damage.keys()))
-        nums = list(map(lambda x: len(x), list(damage.values())))
+        nums = list(map(lambda x: len(x), list(self.damage.values())))
         plt.rcParams['font.family'] = ['Times New Roman']
         fig, ax = plt.subplots(1, 1, figsize=(16, 9), dpi=200)
         x = np.arange(len(classes))  # the label locations
@@ -135,7 +135,7 @@ class TimeAnalysis:
         plt.figure(figsize=(40, 30))
         for key in self.damage.keys():
             if len(key.split('-')[-1]) < 3:
-                v = damage[key][0]
+                v = self.damage[key][0]
                 position_path = os.path.join(LABEL_ROOT_DIR, v + '.txt')
                 pos = np.loadtxt(position_path)
                 idx = np.where(pos == 1)
@@ -522,6 +522,7 @@ class FrequencyAnalysis:
     def __init__(self, damage):
         self.damage = damage
         self.signals = self.extract_signals()
+        self.vis = Visualisation()
 
     def extract_signals(self, scale=1, points=None):
         signals = []
@@ -529,7 +530,7 @@ class FrequencyAnalysis:
         for k in self.damage.keys():
             temp = []
             if len(k.split('-')[-1]) < 3:
-                data = scio.loadmat(os.path.join(DATA_ROOT_DIR, damage[k][0] + '.mat'))
+                data = scio.loadmat(os.path.join(DATA_ROOT_DIR, self.damage[k][0] + '.mat'))
             else:
                 params = self.damage[k][0].split('-')
                 name = ''
@@ -553,25 +554,33 @@ class FrequencyAnalysis:
         j = 0
         fft_results = []
         show_range = show_range or (0, points)
+        # for temp in self.signals:
+        #     shape = (3, len(temp) // 3)
+        #     fig, axs = plt.subplots(shape[0], shape[1], figsize=figsize)
+        #     fft_temp = []
+        #     for i in range(len(temp)):
+        #         fft = np.power(np.abs(np.power(np.fft.fft(temp[i], points), 2)), 0.5)
+        #         fft_temp.append(fft)
+        #         axs[i // 2, i % 2].plot(t[show_range[0]: show_range[1]], fft[show_range[0]: show_range[1]])
+        #         axs[i // 2, i % 2].set_title('s{} energy spectrum'.format(j, i))
+        #     fig.suptitle('class {}'.format(j))
+        #     if save:
+        #         plt.savefig(os.path.join(RESULT_ROOT, str(i) + "_class_fft_energy_spectrum.png"), dpi=600,
+        #                     bbox_inches='tight')
+        #     if show_results:
+        #         plt.show()
+        #     j += 1
+        #     fft_results.append(fft_temp)
+        #
+        # return fft_results
         for temp in self.signals:
-            shape = (3, len(temp) // 3)
-            fig, axs = plt.subplots(shape[0], shape[1], figsize=figsize)
-            fft_temp = []
-            for i in range(len(temp)):
-                fft = np.power(np.abs(np.power(np.fft.fft(temp[i], points), 2)), 0.5)
-                fft_temp.append(fft)
-                axs[i // 2, i % 2].plot(t[show_range[0]: show_range[1]], fft[show_range[0]: show_range[1]])
-                axs[i // 2, i % 2].set_title('s{} energy spectrum'.format(j, i))
-            fig.suptitle('class {}'.format(j))
+            temp = np.array(temp)
+            self.vis.plot_instant_freq(t=t, imfs=temp)
             if save:
                 plt.savefig(os.path.join(RESULT_ROOT, str(i) + "_class_fft_energy_spectrum.png"), dpi=600,
                             bbox_inches='tight')
             if show_results:
-                plt.show()
-            j += 1
-            fft_results.append(fft_temp)
-
-        return fft_results
+                self.vis.show()
 
     def STFT(self, show_results=False, save=False, figsize=(25, 16), show_range=(0, 1500), nperseg=128):
         i = 0
@@ -653,7 +662,7 @@ class ModeDecomposition:
         for k in self.damage.keys():
             temp = []
             if len(k.split('-')[-1]) < 3:
-                data = scio.loadmat(os.path.join(DATA_ROOT_DIR, damage[k][0] + '.mat'))
+                data = scio.loadmat(os.path.join(DATA_ROOT_DIR, self.damage[k][0] + '.mat'))
             else:
                 params = self.damage[k][0].split('-')
                 name = ''
@@ -1022,18 +1031,18 @@ class ModeDecomposition:
         return u, u_hat, omega
 
 
-damage = get_damage()
-t = TimeAnalysis(damage)
+# damage = get_damage()
+# t = TimeAnalysis(damage)
 # classes, nums = t.class_num_analysis(show_results=True)
 # overall_pos = t.show_position(show_results=True, save=False)
-t.signal_mean(show_results=True)  # NEED TO ABS THE SIGNALS, CURRENTLY CANT WORK
+# t.signal_mean(show_results=True)  # NEED TO ABS THE SIGNALS, CURRENTLY CANT WORK
 # t.permutation_entropy(show_results=True)
 # t.approximate_entropy(show_results=True) # ABANDONED
 # t.higuchi_fractal_dimension(show_results=True)
 # t.katz_fractal_dimension(show_results=True) # ABANDONED
 
 
-fa = FrequencyAnalysis(damage)
+# fa = FrequencyAnalysis(damage)
 # fa.FFT(show_results=True, show_range=[0, 300])
 # fa.STFT(show_results=True)
 # fa.wavelet(show_results=True)  # CANT WORK

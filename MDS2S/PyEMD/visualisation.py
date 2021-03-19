@@ -17,7 +17,7 @@ class Visualisation(object):
     This class is for quick and simple result visualisation.
     """
 
-    PLOT_WIDTH = 6
+    PLOT_WIDTH = 12
     PLOT_HEIGHT_PER_IMF = 1.5
 
     def __init__(self, emd_instance=None):
@@ -114,7 +114,7 @@ class Visualisation(object):
 
         for num, imf_inst_freq in enumerate(imfs_inst_freqs):
             ax = axes[num]
-            ax.plot(t, imf_inst_freq)
+            ax.plot(t, abs(imf_inst_freq))
             ax.set_ylabel("IMF {} [Hz]".format(num+1))
 
         # Making the layout a bit more pleasant to the eye
@@ -145,7 +145,7 @@ class Visualisation(object):
         if alpha is None:
             return np.array(inst_freqs)
         else:
-            return np.array([filt6(row, alpha) for row in inst_freqs]) # Filter freqs
+            return np.array([filt6(row, alpha) for row in inst_freqs])  # Filter freqs
 
     def show(self):
         plt.show()

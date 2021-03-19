@@ -20,6 +20,9 @@ from sklearn.utils import shuffle
 import seaborn as sns
 from matplotlib import colors
 import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif']=['SimHei']  # 用来正常显示中文标签
+plt.rcParams['axes.unicode_minus']=False  # 用来正常显示负号
+
 from matplotlib.colors import Normalize
 
 import pywt
@@ -30,7 +33,7 @@ from scipy import signal
 from scipy.signal import butter, deconvolve
 
 
-def average_smoothing(signal, kernel_size=3, stride=1):
+def average_smoothing(signal, kernel_size=10, stride=1):
     sample = [signal[0]]
     start = 0
     end = kernel_size
@@ -315,6 +318,62 @@ def autoEDA(data, figsize=(16, 16)):
 
 
 if __name__ == '__main__':
-    data = np.random.random(1000) - 0.5
-    data_avg = average_smoothing(data)
-    print(data_avg.shape)
+    import scipy.io as scio
+
+    ROOT = ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
+    file_names = os.listdir(ROOT_DIR)
+    file_name = '88-24-10000-400-6500-20-n.mat'
+    data_path = os.path.join(ROOT_DIR, file_name)
+    data = scio.loadmat(data_path)
+    t = np.arange(0, 10000 / 24000, 1 / 24000)
+    f = np.arange(0, 10000) * 24000 / 10000
+
+    s0 = data['s0'][:, 0]
+    s1 = data['s1'][:, 0]
+    s2 = data['s2'][:, 0]
+    s3 = data['s3'][:, 0]
+    s4 = data['s4'][:, 0]
+    s5 = data['s5'][:, 0]
+
+    data = [s0, s1, s2, s3, s4, s5]
+    plt.figure(figsize=(12, 16))
+    for i in range(6):
+        d = data[i]
+
+        # plt.subplot(6, 2, i*2+1)
+        # plt.plot(t, d, color='green')
+        # plt.title("S{} (Before denoising)".format(i))
+        # plt.subplot(6, 2, i*2+2)
+        # plt.plot(t[:1500], average_smoothing(d)[:1500], color='red')
+        # plt.title("S{} (After average denoising with window = 10)".format(i))
+        # plt.subplot(6, 2, i*2+2)
+        # plt.plot(t[:1500], WaveletDenoising(d).out[:1500], color='blue')
+        # plt.title("S{} (After wavelet denoising)".format(i))
+
+        # ********************************************************
+        ax1 = plt.subplot(6, 2, i * 2 + 1)
+        l1, = ax1.plot(t[700:3500], d[700:3500], color='green')
+        l2, = ax1.plot(t[700:3500], average_smoothing(d)[700:3500], color='red')
+        plt.title("S{} (均值消噪, window=10)".format(i))
+        ax1.legend([l1, l2], [u'原始信号', u'均值消噪后信号'], loc='upper right')
+
+        ax2 = plt.subplot(6, 2, i * 2 + 2)
+        l3, = ax2.plot(t[700:3500], d[700:3500], color='green')
+        l4, = ax2.plot(t[700:3500], WaveletDenoising(d).out[700:3500], color='red')
+        plt.title(u"S{} (小波变换消噪)".format(i))
+        ax2.legend([l1, l2], [u'原始信号', u'小波变换消噪后信号'], loc='upper right')
+
+        # ********************************************************
+        # ax1 = plt.subplot(6, 2, i * 2 + 1)
+        # l1, = ax1.plot(t[700:3500], d[700:3500] - average_smoothing(d)[700:3500], color='green')
+        # plt.title(u"S{} 均值消噪滤除的噪声, window=10".format(i))
+        #
+        # ax2 = plt.subplot(6, 2, i * 2 + 2)
+        # l2, = ax2.plot(t[700:3500], d[700:3500] - WaveletDenoising(d).out[700:3500], color='red')
+        # plt.title(u"S{} 小波消噪滤除的噪声)".format(i))
+        #
+        # ax1.legend([l1], [u's{} 均值消噪'.format(i)], loc='upper right')
+        # ax2.legend([l2], [u's{} 小波消噪'.format(i)], loc='upper right')
+
+    plt.show()
+

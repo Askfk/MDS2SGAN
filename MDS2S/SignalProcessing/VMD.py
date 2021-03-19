@@ -190,3 +190,65 @@ def autoVMD(data, alpha=500, tau=0., K=3, DC=0, init=1, tol=1e-7):
         plt.title('combined')
         plt.show()
 
+
+if __name__ == '__main__':
+    import scipy.io as scio
+    import os
+    from EDA import WaveletDenoising
+
+    ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
+
+    file_name = '165-24-10000-400-6500-20-n.mat'
+    fn = os.path.join(ROOT_DIR, file_name)
+
+    data = scio.loadmat(fn)
+    t = np.arange(0, 10000 / 24000, 1 / 24000)
+    f = np.arange(0, 10000) * 24000 / 10000
+
+    s0 = data['s0'][:, 0]
+    s1 = data['s1'][:, 0]
+    s2 = data['s2'][:, 0]
+    s3 = data['s3'][:, 0]
+    s4 = data['s4'][:, 0]
+    s5 = data['s5'][:, 0]
+    d = WaveletDenoising(s1).out
+
+    alpha = 500
+    tau = 0.
+    K = 6
+    DC = 0
+    init = 1
+    tol = 1e-7
+    u, u_hat, omega = VMD(d, alpha, tau, K, DC, init, tol)
+
+    plt.figure(figsize=(16, 16))
+    title = 'VMD'
+
+    n = len(u)
+    fig = plt.figure(figsize=(12, 16))
+    ax_main = fig.add_subplot(n + 1, 1, 1)
+    ax_main.set_title(title)
+    ax_main.plot(t, d)
+
+
+    rec_b = []
+    for i in u:
+        rec_b.append(d - i)
+        d -= i
+
+    for i, y in enumerate(rec_b):
+        ax = fig.add_subplot(len(rec_b) + 1, 2, 3 + i * 2)
+        ax.plot(t, y, 'r')
+
+        ax.set_ylabel("A%d" % (i + 1))
+
+    for i, y in enumerate(u):
+        ax = fig.add_subplot(len(u) + 1, 2, 4 + i * 2)
+        ax.plot(t, y, 'g')
+
+        ax.set_ylabel("D%d" % (i + 1))
+
+    from PyEMD import Visualisation
+    vis = Visualisation()
+    vis.plot_instant_freq(f, imfs=u)
+    vis.show()

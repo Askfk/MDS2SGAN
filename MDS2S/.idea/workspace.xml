@@ -2,42 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/PyEMD/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/BEMD.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/CEEMDAN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/EEMD.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/EMD.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/EMD2d.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/EMD_matlab.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/compact.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/splines.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_all.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_bemd.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_ceemdan.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_compact.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_eemd.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_emd.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_emd2d.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_extrema.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_splines.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/tests/test_visualization.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PyEMD/visualisation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SignalProcessing/TheRealEDA.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SignalProcessing/dsptest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SignalProcessing/temp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SignalProcessing/EMDTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SignalProcessing/GeneralTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SignalProcessing/PickIMF.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SignalProcessing/STFTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SignalProcessing/Wavelet_T_F_TEST.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SignalProcessing/WholeTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SignalProcessing/DPScripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/DPScripts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PyEMD/visualisation.py" beforeDir="false" afterPath="$PROJECT_DIR$/PyEMD/visualisation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SignalProcessing/EDA.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/EDA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SignalProcessing/EMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/EMD.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SignalProcessing/EMD.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SignalProcessing/TheRealEDA.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/TheRealEDA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SignalProcessing/VMD.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/VMD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SignalProcessing/t.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SignalProcessing/waveletTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/Wavelet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymMDS.py" beforeDir="false" afterPath="$PROJECT_DIR$/ymMDS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymScripts/ymLosses.py" beforeDir="false" afterPath="$PROJECT_DIR$/ymScripts/ymLosses.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SignalProcessing/Wavelet.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/WaveletTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SignalProcessing/dsptest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SignalProcessing/temp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,11 +60,12 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Scripts" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/SignalProcessing" />
+      <recent name="$PROJECT_DIR$/Scripts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -99,8 +80,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.temp">
-    <configuration name="EMD" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.Wavelet_T_F_TEST">
+    <configuration name="PickIMF" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MDS2S" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -113,7 +94,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/EMD.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/PickIMF.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -122,7 +103,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="TheRealEDA" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="VMD" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MDS2S" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -135,7 +116,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/TheRealEDA.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/VMD.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -144,7 +125,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="dsptest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Wavelet" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MDS2S" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -157,7 +138,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/dsptest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/WaveletTest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -166,7 +147,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="temp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Wavelet_T_F_TEST" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MDS2S" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -179,7 +160,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/temp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/Wavelet_T_F_TEST.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -188,7 +169,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="WholeTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MDS2S" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -196,12 +177,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SignalProcessing" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignalProcessing/WholeTest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -212,11 +193,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.temp" />
-        <item itemvalue="Python.TheRealEDA" />
-        <item itemvalue="Python.dsptest" />
-        <item itemvalue="Python.EMD" />
-        <item itemvalue="Python.test" />
+        <item itemvalue="Python.Wavelet_T_F_TEST" />
+        <item itemvalue="Python.WholeTest" />
+        <item itemvalue="Python.Wavelet" />
+        <item itemvalue="Python.PickIMF" />
+        <item itemvalue="Python.VMD" />
       </list>
     </recent_temporary>
   </component>
@@ -260,7 +241,12 @@
       <workItem from="1611388876145" duration="16000" />
       <workItem from="1611476542833" duration="8883000" />
       <workItem from="1612157193581" duration="55000" />
-      <workItem from="1612408453830" duration="1939000" />
+      <workItem from="1612408453830" duration="7223000" />
+      <workItem from="1612685446057" duration="23236000" />
+      <workItem from="1614229854477" duration="10147000" />
+      <workItem from="1614478300466" duration="6721000" />
+      <workItem from="1614948966160" duration="25282000" />
+      <workItem from="1615945233718" duration="1273000" />
     </task>
     <servers />
   </component>
@@ -280,39 +266,34 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SignalProcessing/VMD.py</url>
-          <line>155</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MDS2S$ymTransformer.coverage" NAME="ymTransformer Coverage Results" MODIFIED="1608288975034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
-    <SUITE FILE_PATH="coverage/MDS2S$test__2_.coverage" NAME="test (2) Coverage Results" MODIFIED="1604577780042" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackBones" />
-    <SUITE FILE_PATH="coverage/MDS2S$EDA.coverage" NAME="EDA Coverage Results" MODIFIED="1605347922746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
-    <SUITE FILE_PATH="coverage/MDS2S$config.coverage" NAME="config Coverage Results" MODIFIED="1606404077537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MDS2S$dsptest.coverage" NAME="dsptest Coverage Results" MODIFIED="1610939650415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
-    <SUITE FILE_PATH="coverage/MDS2S$temp.coverage" NAME="temp Coverage Results" MODIFIED="1612409670055" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
-    <SUITE FILE_PATH="coverage/MDS2S$t.coverage" NAME="t Coverage Results" MODIFIED="1605352922887" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
-    <SUITE FILE_PATH="coverage/MDS2S$backbone.coverage" NAME="backbone Coverage Results" MODIFIED="1606112155522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackBones" />
-    <SUITE FILE_PATH="coverage/MDS2S$ymSeq2seq.coverage" NAME="ymSeq2seq Coverage Results" MODIFIED="1606469988098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
+    <SUITE FILE_PATH="coverage/MDS2S$PickIMF.coverage" NAME="PickIMF Coverage Results" MODIFIED="1615355973716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$dsptest.coverage" NAME="dsptest Coverage Results" MODIFIED="1612944579674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$ymLayers.coverage" NAME="ymLayers Coverage Results" MODIFIED="1607850788921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
-    <SUITE FILE_PATH="coverage/MDS2S$LabelGenerator.coverage" NAME="LabelGenerator Coverage Results" MODIFIED="1609659565260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
-    <SUITE FILE_PATH="coverage/MDS2S$TheRealEDA.coverage" NAME="TheRealEDA Coverage Results" MODIFIED="1611913910709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
-    <SUITE FILE_PATH="coverage/MDS2S$ymMDS.coverage" NAME="ymMDS Coverage Results" MODIFIED="1606648002056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MDS2S$DPScripts.coverage" NAME="DPScripts Coverage Results" MODIFIED="1608010285575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$Wavelet.coverage" NAME="Wavelet Coverage Results" MODIFIED="1615382666760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$MBConv.coverage" NAME="MBConv Coverage Results" MODIFIED="1604204728870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Scripts" />
     <SUITE FILE_PATH="coverage/MDS2S$ymLosses.coverage" NAME="ymLosses Coverage Results" MODIFIED="1606380649754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
     <SUITE FILE_PATH="coverage/MDS2S$F.coverage" NAME="F Coverage Results" MODIFIED="1605330557497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalPreprocessing" />
     <SUITE FILE_PATH="coverage/MDS2S$waveletTest.coverage" NAME="waveletTest Coverage Results" MODIFIED="1609568911386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
-    <SUITE FILE_PATH="coverage/MDS2S$test.coverage" NAME="test Coverage Results" MODIFIED="1610269292790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MDS2S$EMD.coverage" NAME="EMD Coverage Results" MODIFIED="1610364231794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$EMD.coverage" NAME="EMD Coverage Results" MODIFIED="1612519233517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$test.coverage" NAME="test Coverage Results" MODIFIED="1613532011858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MDS2S$utils.coverage" NAME="utils Coverage Results" MODIFIED="1608010158061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
+    <SUITE FILE_PATH="coverage/MDS2S$STFTest.coverage" NAME="STFTest Coverage Results" MODIFIED="1615103286480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1605017802750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MDS2S$test__2_.coverage" NAME="test (2) Coverage Results" MODIFIED="1604577780042" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackBones" />
+    <SUITE FILE_PATH="coverage/MDS2S$VMD.coverage" NAME="VMD Coverage Results" MODIFIED="1615119850661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$config.coverage" NAME="config Coverage Results" MODIFIED="1606404077537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MDS2S$EDA.coverage" NAME="EDA Coverage Results" MODIFIED="1614755586077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$temp.coverage" NAME="temp Coverage Results" MODIFIED="1615119787381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$t.coverage" NAME="t Coverage Results" MODIFIED="1605352922887" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$WholeTest.coverage" NAME="WholeTest Coverage Results" MODIFIED="1615383220323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$backbone.coverage" NAME="backbone Coverage Results" MODIFIED="1606112155522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackBones" />
+    <SUITE FILE_PATH="coverage/MDS2S$ymSeq2seq.coverage" NAME="ymSeq2seq Coverage Results" MODIFIED="1606469988098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
+    <SUITE FILE_PATH="coverage/MDS2S$LabelGenerator.coverage" NAME="LabelGenerator Coverage Results" MODIFIED="1609659565260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$TheRealEDA.coverage" NAME="TheRealEDA Coverage Results" MODIFIED="1612756808808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$Wavelet_T_F_TEST.coverage" NAME="Wavelet_T_F_TEST Coverage Results" MODIFIED="1615475555786" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
+    <SUITE FILE_PATH="coverage/MDS2S$ymMDS.coverage" NAME="ymMDS Coverage Results" MODIFIED="1606648002056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
