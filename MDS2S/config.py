@@ -1,13 +1,35 @@
 import collections
+import numpy as np
 
 
 class Config(object):
 
     MDS = 'seq2seq'  # seq2seq or transformer
 
-    BATCH_SIZE = 4
-    SIGNAL_FREQ = 96
-    SIGNAL_PERIOD = 96
+    BATCH_SIZE = 8
+
+    CHANNELS = [0, 1, 2]
+
+    # Data collective params
+    SAMPLING_RATE = 24e3
+    SAMPLING_LENGTH = 1e4
+    T = np.arange(0, 1e4/SAMPLING_RATE, 1.0/SAMPLING_RATE)
+
+    # Data address
+    DATA_ROOT_DIR = "/Users/zcc/Documents/wield/data"
+    LABEL_ROOT_DIR = "/Users/zcc/Documents/wield/Loc&Depth"
+    IMFs_ROOT_DIR = "/Users/zcc/Documents/wield/IMFs"
+    FINAL_ROOT_DIR = "/Users/zcc/Documents/wield/final"
+
+    # Preprocess
+    TIME_RANGE = [700, 3500]  # total = 52 x 52 = 2704
+    FREQ_RANGE = [2626, -29]  # total = 144
+    SLICE_LENGTH = 144
+    SCALE = 1e2
+
+    # Wavelet TF params
+    W_TF = "cgau8"
+    TOTALSCALE = TIME_RANGE[1] - TIME_RANGE[0]
 
     # STFT params
     WINDOW = 95
@@ -15,15 +37,6 @@ class Config(object):
     USE_STFT = False
 
     AMPLIFIER = 1
-
-    # The num of status of welding lines, one-hot encode
-    NUM_CLASSES = 6
-
-    # The num of mode status of lamb wave
-    NUM_MODALS = 7
-
-    # The num of sensor when collecting the data
-    NUM_SENSORS = 3
 
     # The localization area
     LOCAL_HEIGHT = 80
@@ -33,7 +46,7 @@ class Config(object):
     NAME = None
 
     # Seq2seq hyper parameters
-    ENCODER_BACKBONE = 'custom'
+    ENCODER_BACKBONE = 'efficientnet-b3'
     DECODER_BACKBONE = 'custom'
 
     ENCODER_REPEAT = 5
@@ -128,18 +141,15 @@ class Config(object):
         # TOTAL_BLOCK_NUMS: for drop rate calculation.
         self.TOTAL_BLOCK_NUMS = sum(block_args.num_repeat for block_args in self.DEFAULT_BLOCKS_ARGS)
 
-        # The input shape of Discriminator
-        self.INPUT_SIZE = [self.SIGNAL_FREQ, self.SIGNAL_PERIOD, self.NUM_MODALS]
-
-        self.computeDecoderInputResolution()
+        # self.computeDecoderInputResolution()
 
     def calculateDropRate(self, block_args):
         pass
 
-    def computeDecoderInputResolution(self):
-
-        self.resolution = 9 * self.SIGNAL_FREQ // 8
-        self.DECODER_INPUT_SHAPE = [None, self.resolution, self.resolution, self.TOP_DOWN_PYRAMID_SIZE]
+    # def computeDecoderInputResolution(self):
+    #
+    #     self.resolution = 9 * self.SIGNAL_FREQ // 8
+    #     self.DECODER_INPUT_SHAPE = [None, self.resolution, self.resolution, self.TOP_DOWN_PYRAMID_SIZE]
 
     def to_dict(self):
         return {a: getattr(self, a)
@@ -159,4 +169,4 @@ class Config(object):
 
 if __name__ == '__main__':
     c = Config()
-    print(c.resolution)
+    # print(c.resolution)

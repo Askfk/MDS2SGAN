@@ -1,9 +1,9 @@
 import tensorflow as tf
 import numpy as np
 
-from .ymLayers import BatchNorm, FixedDropout, DilatedConv2d
-from .ymActivations import swish, relu, leakyRelu
-from ..BackBones.backbone import build_backbone_net_graph
+from ymLayers import BatchNorm, FixedDropout, DilatedConv2d
+from ymActivations import swish, relu, leakyRelu
+from BackBones.backbone import build_backbone_net_graph
 
 
 def customStrides(n):
@@ -164,11 +164,12 @@ class Decoder(tf.keras.Model):
 def get_encoders_graph(config, input_tensor=None):
     if config.ENCODER_BACKBONE == 'custom':
         encoder = Encoder(config, prefix='encoder')
-        if input_tensor:
-            return encoder.build_model(input_tensor)
-        return encoder
     else:
-        return build_backbone_net_graph(config.ENCODER_BACKBONE, config)
+        encoder = build_backbone_net_graph(config.ENCODER_BACKBONE, config)
+
+    if input_tensor:
+        return encoder.build_model(input_tensor)
+    return encoder
 
 
 # build decoder backbones
@@ -185,7 +186,7 @@ def get_decoders_graph(config, input_tensor=None):
 if __name__ == '__main__':
     from config import Config
 
-    input_t = tf.random.uniform([6, 96, 96, 256])
+    input_t = tf.random.uniform([2, 144, 144, 57])
     #
     config = Config()
     encoder = get_encoders_graph(config)

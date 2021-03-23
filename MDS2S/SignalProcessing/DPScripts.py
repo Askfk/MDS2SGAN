@@ -6,13 +6,9 @@ import itertools
 import tensorflow as tf
 import pywt
 
-from ..config import Config as config
+from config import Config as config
 
-from ..ymScripts.utils import visualize_signals
-
-# from .EDA import autoEDA
-# from .EMD import autoEMD
-# from .VMD import autoVMD
+from ymScripts.utils import visualize_signals
 
 
 ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/all'
@@ -261,16 +257,6 @@ if __name__ == '__main__':
         print("{}--{}--{}".format(time_data.shape, freq_data.shape, label))
         visualize_signals(freq_data.numpy(), ylim=(0, 10), show_batch=2, )
     plt.show()
-
-    # for _, freq_data, _ in dataset.take(1):
-    #     for i in range(2):
-    #         d1 = freq_data[i, :, :, 2]
-    #         log_spec = np.log(d1.numpy().T)
-    #         height = log_spec.shape[0]
-    #         X = np.arange(193 * 65, step=height + 1)
-    #         Y = range(height)
-    #         plt.pcolormesh(X, Y, log_spec)
-    # plt.show()
 
 
 
