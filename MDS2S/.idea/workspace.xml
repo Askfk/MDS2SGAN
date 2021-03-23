@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/new/DataGenerator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/new/Losses.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/new/Scripts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/new/networks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/new/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MDS2S.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MDS2S.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SignalProcessing/DPScripts.py" beforeDir="false" afterPath="$PROJECT_DIR$/SignalProcessing/DPScripts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymScripts/ymSeq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/ymScripts/ymSeq2seq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new/networks.py" beforeDir="false" afterPath="$PROJECT_DIR$/new/networks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,7 +237,7 @@
       <workItem from="1615945233718" duration="1273000" />
       <workItem from="1616386762979" duration="758000" />
       <workItem from="1616387825029" duration="1108000" />
-      <workItem from="1616392600252" duration="36132000" />
+      <workItem from="1616392600252" duration="36801000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-from ymScripts.ymLayers import BatchNorm
+from tensorflow.keras.layers import BatchNormalization as BatchNorm
 
 
 class Generator(tf.keras.Model):
