@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/new/Networks_2nd.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/networks.py" beforeDir="false" afterPath="$PROJECT_DIR$/new/Networks_1st.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new/Networks_1st.py" beforeDir="false" afterPath="$PROJECT_DIR$/new/Networks_1st.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new/Networks_2nd.py" beforeDir="false" afterPath="$PROJECT_DIR$/new/Networks_2nd.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +69,7 @@
       <recent name="$PROJECT_DIR$/Scripts" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Networks_1st">
+  <component name="RunManager" selected="Python.Networks_2nd">
     <configuration name="DataGenerator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MDS2S" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -106,6 +106,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/new/Networks_1st.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Networks_2nd" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MDS2S" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/new" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/new/Networks_2nd.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -158,35 +180,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="ymSeq2seq" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MDS2S" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ymScripts" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ymScripts/ymSeq2seq.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Networks_2nd" />
         <item itemvalue="Python.Networks_1st" />
         <item itemvalue="Python.DataGenerator" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.Scripts" />
-        <item itemvalue="Python.ymSeq2seq" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +239,7 @@
       <workItem from="1615945233718" duration="1273000" />
       <workItem from="1616386762979" duration="758000" />
       <workItem from="1616387825029" duration="1108000" />
-      <workItem from="1616392600252" duration="38112000" />
+      <workItem from="1616392600252" duration="41248000" />
     </task>
     <servers />
   </component>
@@ -263,7 +263,7 @@
     <SUITE FILE_PATH="coverage/MDS2S$Scripts.coverage" NAME="Scripts Coverage Results" MODIFIED="1616495291672" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new" />
     <SUITE FILE_PATH="coverage/MDS2S$ymLosses.coverage" NAME="ymLosses Coverage Results" MODIFIED="1606380649754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
     <SUITE FILE_PATH="coverage/MDS2S$ymTransformer.coverage" NAME="ymTransformer Coverage Results" MODIFIED="1608288975034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
-    <SUITE FILE_PATH="coverage/MDS2S$networks.coverage" NAME="networks Coverage Results" MODIFIED="1616507784684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MDS2S$networks.coverage" NAME="Networks_1st Coverage Results" MODIFIED="1616553464233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MDS2S$test.coverage" NAME="test Coverage Results" MODIFIED="1616504495540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new" />
     <SUITE FILE_PATH="coverage/MDS2S$DataGenerator.coverage" NAME="DataGenerator Coverage Results" MODIFIED="1616506183997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new" />
     <SUITE FILE_PATH="coverage/MDS2S$DPScripts.coverage" NAME="DPScripts Coverage Results" MODIFIED="1608010285575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
@@ -289,6 +289,7 @@
     <SUITE FILE_PATH="coverage/MDS2S$dsptest.coverage" NAME="dsptest Coverage Results" MODIFIED="1612944579674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$config.coverage" NAME="config Coverage Results" MODIFIED="1606404077537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MDS2S$backbone.coverage" NAME="backbone Coverage Results" MODIFIED="1606112155522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BackBones" />
+    <SUITE FILE_PATH="coverage/MDS2S$Networks_2nd.coverage" NAME="Networks_2nd Coverage Results" MODIFIED="1616554088298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new" />
     <SUITE FILE_PATH="coverage/MDS2S$ymLayers.coverage" NAME="ymLayers Coverage Results" MODIFIED="1607850788921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ymScripts" />
   </component>
 </project>

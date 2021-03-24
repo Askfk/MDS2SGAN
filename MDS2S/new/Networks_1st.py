@@ -154,23 +154,28 @@ if __name__ == '__main__':
     from DataGenerator import DataGenerator
 
     config = Config()
-    generator = DataGenerator(config).generator
-    print(">>>>>>>>>>>>>>Dataset Initialization Done")
-    dataset = tf.data.Dataset.from_generator(generator,
-                                             (tf.float32, tf.float32, tf.float32, tf.float32, tf.float32),
-                                             (tf.TensorShape([144, 144, 57]),
-                                              tf.TensorShape([2800, 9]),
-                                              tf.TensorShape([144, 72]),
-                                              tf.TensorShape([2]),
-                                              tf.TensorShape([None])))
-    dataset = dataset.batch(8).shuffle(16)
+    # generator = DataGenerator(config).generator
+    # print(">>>>>>>>>>>>>>Dataset Initialization Done")
+    # dataset = tf.data.Dataset.from_generator(generator,
+    #                                          (tf.float32, tf.float32, tf.float32, tf.float32, tf.float32),
+    #                                          (tf.TensorShape([144, 144, 57]),
+    #                                           tf.TensorShape([2800, 9]),
+    #                                           tf.TensorShape([144, 72]),
+    #                                           tf.TensorShape([2]),
+    #                                           tf.TensorShape([None])))
+    # dataset = dataset.batch(8).shuffle(16)
+    #
+    # g = Generator(config)
+    # d = Discriminator(config)
+    #
+    # for input_tensor, _, loc, damage_matrix, depth in dataset.take(1):
+    #     feats, imfs = g(input_tensor)
+    #     print(feats.shape, imfs.shape)
+    #
+    #     pm, dm, lm, _ = d(feats)
+    #     print(pm.shape, dm.shape, lm.shape)
 
-    g = Generator(config)
-    d = Discriminator(config)
-
-    for input_tensor, _, loc, damage_matrix, depth in dataset.take(1):
-        feats, imfs = g(input_tensor)
-        print(feats.shape, imfs.shape)
-
-        pm, dm, lm, _ = d(feats)
-        print(pm.shape, dm.shape, lm.shape)
+    d = Generator(config)
+    input_tensor = tf.keras.Input([144, 144, 57])
+    model = d.build_model(input_tensor)
+    model.summary()
