@@ -1,21 +1,9 @@
-import math
-import random
-import shutil
-from distutils.version import LooseVersion
-
-import skimage.color
-import skimage.io
-import skimage.transform
-import tensorflow as tf
-import numpy as np
-import warnings
-import scipy
 import urllib.request
-import matplotlib.pyplot as plt
-from ..config import Config
+import shutil
+
 
 WEIGHTS_URL = ''
-DATASET_URL = "https://github.com/Askfk/MDS2SGAN/releases/download/1/1120.zip"
+DATASET_URL = "https://github.com/Askfk/MDS2SGAN/releases/download/1/final.zip"
 
 
 def log(text, array=None):
@@ -56,34 +44,6 @@ def download_dataset(dataset_path, verbose=1):
         shutil.copyfileobj(resp, out)
     if verbose > 0:
         print("... done downloading dataset!")
-
-
-def visualize_signals(signals, axs=None, figsize=(25, 16), ylim=(-0.8, 0.8), show_batch=1):
-    """
-    Visualize signals sets by subpot
-    :param ylim:
-    :param show_batch:
-    :param figsize:
-    :param axs:
-    :param signals:
-    :return:
-    """
-
-    n = min(show_batch, signals.shape[0])
-    m = signals.shape[-1]  # channels
-    plt.figure(figsize=figsize)
-    if not axs:
-        figure, axs = plt.subplots(m, n)
-
-    for i in range(m):
-        for j in range(n):
-            ax = axs[i, j]
-            signal = signals[j, :, :, i].flatten()
-            ax.plot(signal)
-            ax.set_ylim(ylim)
-            ax.set_title("Batch {} Channel {}".format(j+1, i+1))
-
-    return axs
 
 
 def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsize=(25, 20), save_path=None,
@@ -135,16 +95,3 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsiz
             pass
 
     return figure, ax
-
-
-if __name__ == '__main__':
-    import tensorflow as tf
-
-    original = tf.random.uniform([2, 96, 96, 3]) - 0.5
-    decomposed = tf.random.uniform([2, 96, 96, 12]) - 0.5
-    visualize_signals(original.numpy(), show_batch=2)
-    plt.show()
-
-
-
-    # visualize_original_and_decomposed_modals(original, decomposed)

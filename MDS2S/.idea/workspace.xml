@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="" />
+    <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/new/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ymScripts/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/ymScripts/utils.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,6 +64,7 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/new" />
+      <recent name="$PROJECT_DIR$/SignalScripts" />
       <recent name="$PROJECT_DIR$/SignalProcessing" />
       <recent name="$PROJECT_DIR$/Scripts" />
     </key>
@@ -235,7 +239,7 @@
       <workItem from="1615945233718" duration="1273000" />
       <workItem from="1616386762979" duration="758000" />
       <workItem from="1616387825029" duration="1108000" />
-      <workItem from="1616392600252" duration="41801000" />
+      <workItem from="1616392600252" duration="42192000" />
     </task>
     <servers />
   </component>
