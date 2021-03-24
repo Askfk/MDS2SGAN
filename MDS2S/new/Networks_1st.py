@@ -18,26 +18,26 @@ class Generator(tf.keras.Model):
         self.conv1 = tf.keras.layers.Conv2D(64, kernel_size=(3, 3), strides=2, padding='same',
                                             name=self.prefix+"_conv1")
         self.bn1 = BatchNorm()
-        self.ac1 = tf.keras.activations.swish
+        self.ac1 = tf.keras.activations.relu
 
         self.conv2 = tf.keras.layers.Conv2D(128, kernel_size=(3, 3), strides=2, padding='same',
                                             name=self.prefix + "_conv2")
         self.bn2 = BatchNorm()
-        self.ac2 = tf.keras.activations.swish
+        self.ac2 = tf.keras.activations.relu
 
         self.conv3 = tf.keras.layers.Conv2D(256, kernel_size=(3, 3), strides=2, padding='same',
                                             name=self.prefix + "_conv3")
         self.bn3 = BatchNorm()
-        self.ac3 = tf.keras.activations.swish
+        self.ac3 = tf.keras.activations.relu
 
         self.conv4 = tf.keras.layers.Conv2D(256, kernel_size=(3, 3), strides=2, padding='same',
                                             name=self.prefix + "_conv4")
         self.bn4 = BatchNorm()
-        self.ac4 = tf.keras.activations.swish
+        self.ac4 = tf.keras.activations.relu
 
         self.conv = tf.keras.layers.Conv2D(256, kernel_size=(3, 3), padding='same', name=self.prefix+"_final_conv")
         self.bn = BatchNorm()
-        self.ac = tf.keras.activations.swish
+        self.ac = tf.keras.activations.relu
 
     def call(self, inputs, training=None, mask=None):
         x = self.conv1(inputs)  # 72
@@ -76,22 +76,22 @@ class Generator(tf.keras.Model):
         for i in range(self.repeat):
             x = tf.keras.layers.Conv2D(256, (3, 3), padding='same', name=self.prefix+'_IMFs_3x3conv{}'.format(i+1))(x)
             x = BatchNorm()(x, training=training)
-            x = tf.keras.activations.swish(x)
+            x = tf.keras.activations.relu(x)
 
             x = tf.keras.layers.Conv2D(256, (1, 1), padding='same', name=self.prefix+'_IMFs_1x1conv{}'.format(i+1))(x)
             x = BatchNorm()(x, training=training)
-            x = tf.keras.activations.swish(x)
+            x = tf.keras.activations.relu(x)
         x = tf.keras.layers.Conv2DTranspose(128, kernel_size=(3, 3), strides=1, padding='valid')(x)
         x = BatchNorm()(x, training=training)
-        x = tf.keras.activations.swish(x)  # 11x11x128
+        x = tf.keras.activations.relu(x)  # 11x11x128
 
         x = tf.keras.layers.Conv2DTranspose(64, kernel_size=(3, 3), strides=1, padding='valid')(x)
         x = BatchNorm()(x, training=training)
-        x = tf.keras.activations.swish(x)  # 13x13x64
+        x = tf.keras.activations.relu(x)  # 13x13x64
 
         x = tf.keras.layers.Conv2DTranspose(36, kernel_size=(3, 3), strides=2, padding='same')(x)
         x = BatchNorm()(x, training=training)
-        x = tf.keras.activations.swish(x)  # 26x26x36
+        x = tf.keras.activations.relu(x)  # 26x26x36
 
         imfs = tf.reshape(x, [-1, 9, 2704])
 
@@ -117,14 +117,14 @@ class Discriminator(tf.keras.Model):
         for i in range(self.repeat):
             x = tf.keras.layers.Conv2D(256, (3, 3), padding='same', name=self.prefix+"_3x3conv{}".format(i+1))(x)
             x = BatchNorm()(x, training=training)
-            x = tf.keras.activations.swish(x)
+            x = tf.keras.activations.relu(x)
             x = tf.keras.layers.Conv2D(256, (1, 1), padding='same', name=self.prefix+"_1x1conv{}".format(i+1))(x)
             x = BatchNorm()(x, training=training)
-            x = tf.keras.activations.swish(x)
+            x = tf.keras.activations.relu(x)
 
         pm = tf.keras.layers.Conv2D(4, (1, 1), padding='same', name=self.prefix+"_possi")(x)
         pm = BatchNorm()(pm, training=training)
-        pm = tf.keras.activations.swish(pm)
+        pm = tf.keras.activations.relu(pm)
         pm = tf.keras.layers.Flatten()(pm)
         pm = tf.keras.layers.Dense(2)(pm)
         pm_logits = tf.reshape(pm, [-1, 2])
@@ -132,14 +132,14 @@ class Discriminator(tf.keras.Model):
 
         dm = tf.keras.layers.Conv2D(4, (1, 1), padding='same', name=self.prefix + "_depth")(x)
         dm = BatchNorm()(dm, training=training)
-        dm = tf.keras.activations.swish(dm)
+        dm = tf.keras.activations.relu(dm)
         dm = tf.keras.layers.Flatten()(dm)
         dm = tf.keras.layers.Dense(1)(dm)
         dm = tf.reshape(dm, [-1, 1])
 
         lm = tf.keras.layers.Conv2D(128, (1, 1), padding='same', name=self.prefix+"_loc")(x)
         lm = BatchNorm()(lm, training=training)
-        lm = tf.keras.activations.swish(lm)
+        lm = tf.keras.activations.relu(lm)
         lm = tf.reshape(lm, [-1, 144, 72])
 
         return pm, dm, lm, pm_logits
