@@ -26,7 +26,7 @@ class Config(object):
     FREQ_RANGE = [2626, -29]  # total = 144
     SLICE_LENGTH = 144
     SHIFT = 27e2
-    IMFS_SCALE = np.exp(3e3)
+    IMFS_SCALE = np.log(6e3)
     DEPTH_SCALE = 20
 
     # Wavelet TF params

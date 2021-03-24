@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a0c8f98-9c50-40fb-a5de-b3104b6970e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/new/DataGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/new/DataGenerator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new/Losses.py" beforeDir="false" afterPath="$PROJECT_DIR$/new/Losses.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +240,7 @@
       <workItem from="1616386762979" duration="758000" />
       <workItem from="1616387825029" duration="1108000" />
       <workItem from="1616392600252" duration="48425000" />
-      <workItem from="1616562423118" duration="9618000" />
+      <workItem from="1616562423118" duration="10231000" />
     </task>
     <servers />
   </component>
@@ -279,7 +280,7 @@
     <SUITE FILE_PATH="coverage/MDS2S$TheRealEDA.coverage" NAME="TheRealEDA Coverage Results" MODIFIED="1612756808808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$WholeTest.coverage" NAME="WholeTest Coverage Results" MODIFIED="1615383220323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$Wavelet_T_F_TEST.coverage" NAME="Wavelet_T_F_TEST Coverage Results" MODIFIED="1615475555786" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
-    <SUITE FILE_PATH="coverage/MDS2S$Losses.coverage" NAME="Losses Coverage Results" MODIFIED="1616572869873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new" />
+    <SUITE FILE_PATH="coverage/MDS2S$Losses.coverage" NAME="Losses Coverage Results" MODIFIED="1616588109428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/new" />
     <SUITE FILE_PATH="coverage/MDS2S$PickIMF.coverage" NAME="PickIMF Coverage Results" MODIFIED="1616562508001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$VMD.coverage" NAME="VMD Coverage Results" MODIFIED="1615119850661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalProcessing" />
     <SUITE FILE_PATH="coverage/MDS2S$F.coverage" NAME="F Coverage Results" MODIFIED="1605330557497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SignalPreprocessing" />

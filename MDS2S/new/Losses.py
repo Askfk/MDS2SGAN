@@ -89,7 +89,7 @@ if __name__ == '__main__':
 
         loc_loss = Losses.loc_loss(lm, gt_loc)
         print("Localization loss : {}".format(loc_loss))
-        visualize_original_and_decomposed_modals(signals, np.exp(gt_imfs) - cfg.SHIFT)
-        visualize_original_and_decomposed_modals(signals, np.exp(imfs) - cfg.SHIFT)
+        visualize_original_and_decomposed_modals(signals, np.exp(gt_imfs * cfg.IMFS_SCALE) - cfg.SHIFT)
+        visualize_original_and_decomposed_modals(signals, np.exp(imfs * cfg.IMFS_SCALE) - cfg.SHIFT)
 
         plt.show()
