@@ -13,15 +13,15 @@ class Generator(tf.keras.Model):
     def call(self, inputs, training=None, mask=None):
         x = tf.keras.layers.Conv2D(32, (3, 3), padding='same', name=self.prefix+"_in_conv")(inputs)
         x = BatchNorm()(x, training=True)
-        x = tf.keras.activations.swish(x)
+        x = tf.keras.activations.relu(x)
 
         for i in range(4):
             x = tf.keras.layers.DepthwiseConv2D((3, 3), strides=(2, 2), padding='same', depth_multiplier=2)(x)
             x = BatchNorm()(x, training=True)
-            x = tf.keras.activations.swish(x)
+            x = tf.keras.activations.relu(x)
         x = tf.keras.layers.DepthwiseConv2D((1, 1), strides=(1, 1), padding='same', depth_multiplier=1)(x)
         x = BatchNorm()(x, training=training)
-        x = tf.keras.activations.swish(x)
+        x = tf.keras.activations.relu(x)
 
         # feats : [N, 9, 9, 512]
         feats = x
@@ -29,17 +29,17 @@ class Generator(tf.keras.Model):
         x = tf.keras.layers.Conv2DTranspose(128, kernel_size=(3, 3), strides=1, padding='valid',
                                             name=self.prefix+"_convT_1")(x)
         x = BatchNorm()(x, training=training)
-        x = tf.keras.activations.swish(x)  # 11x11x128
+        x = tf.keras.activations.relu(x)  # 11x11x128
 
         x = tf.keras.layers.Conv2DTranspose(64, kernel_size=(3, 3), strides=1, padding='valid',
                                             name=self.prefix+"_convT_2")(x)
         x = BatchNorm()(x, training=training)
-        x = tf.keras.activations.swish(x)  # 13x13x64
+        x = tf.keras.activations.relu(x)  # 13x13x64
 
         x = tf.keras.layers.Conv2DTranspose(36, kernel_size=(3, 3), strides=2, padding='same',
                                             name=self.prefix+"_convT_3")(x)
         x = BatchNorm()(x, training=training)
-        x = tf.keras.activations.swish(x)  # 26x26x36
+        x = tf.keras.activations.relu(x)  # 26x26x36
 
         imfs = tf.reshape(x, [-1, 9, 2704])
         return feats, imfs
