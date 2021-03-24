@@ -41,7 +41,7 @@ class Generator(tf.keras.Model):
         x = BatchNorm()(x, training=training)
         x = tf.keras.activations.swish(x)  # 26x26x36
 
-        imfs = tf.reshape(x, [-1, 2704, 9])
+        imfs = tf.reshape(x, [-1, 9, 2704])
         return feats, imfs
 
     def build_model(self, input_tensor):

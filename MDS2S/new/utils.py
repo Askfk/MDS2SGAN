@@ -1,5 +1,7 @@
 import urllib.request
 import shutil
+import matplotlib.pyplot as plt
+import tensorflow as tf
 
 
 WEIGHTS_URL = ''
@@ -62,33 +64,32 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsiz
     """
 
     batch_size = min(show_batch, multi.shape[0])
-    signal_nums = multi.shape[-1]
+    signal_nums = multi.shape[1]
+    s_l = single.shape[2]
     figure, ax = plt.subplots(num_modals + 2, signal_nums, figsize=figsize)
 
     for i in range(batch_size):
         original_signal = multi[i]
         decomposed_signals = single[i]
         for j in range(signal_nums):
-            sum_signal = tf.zeros_like(original_signal[:, :, j]).numpy().flatten()
-            os = original_signal[:, :, j].numpy().flatten()
-            if denosing is not None:
-                os = denosing(os).out
+            sum_signal = tf.zeros_like(original_signal[j, :s_l]).numpy()
+            os = original_signal[j, :s_l].numpy()
             ax[0, j].plot(os)
             ax[0, j].set_title("Original_{}".format(j + 1))
-            ax[0, j].set_ylim(ylim)
+            # ax[0, j].set_ylim(ylim)
             for n in range(num_modals):
-                ds = decomposed_signals[:, :, n + j * num_modals].numpy().flatten()
+                ds = decomposed_signals[n + j * num_modals, :].numpy()
                 if denosing is not None:
                     ds = denosing(ds).out
                 sum_signal += ds
                 ax[2 + n, j].plot(ds)
                 ax[2 + n, j].set_title("Decomposed_{}_{}".format(j + 1, n + 1))
-                ax[2 + n, j].set_ylim(ylim)
+                # ax[2 + n, j].set_ylim(ylim)
             error = os - sum_signal
             ax[1, j].plot(sum_signal, color='m')
             ax[1, j].plot(error, color='c')
             ax[1, j].set_title('sum_error_{}'.format(j+1))
-            ax[1, j].set_ylim(ylim)
+            # ax[1, j].set_ylim(ylim)
         if save_path is not None:
 
             # TODO: Finish the way to save figures

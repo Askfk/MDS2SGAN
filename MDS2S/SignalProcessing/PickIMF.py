@@ -1,16 +1,15 @@
 import numpy as np
 import os
 import scipy.io as scio
+import matplotlib.pyplot as plt
 from new.EDA import WaveletDenoising
 import pywt
 mode = pywt.Modes.smooth
 
-DATA_ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
-IMF_ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/PickedIMFs'
+DATA_ROOT_DIR = '/Users/zcc/Documents/wield/data'
+IMF_ROOT_DIR = '/Users/zcc/Documents/wield/IMFs'
 
 data_file_names = os.listdir(DATA_ROOT_DIR)
-data_file_names_cleared = list(map(lambda x: x[:-4], data_file_names))
-
 n = len(data_file_names)
 
 t = np.arange(0, 10000 / 24000, 1 / 24000)
@@ -60,13 +59,13 @@ for i in range(n):
 
     data = [s0, s1, s2, s3, s4, s5]
     IMFs = {}
-    save_path = os.path.join(IMF_ROOT_DIR, data_file_names_cleared[i] + '.npy')
+    save_path = os.path.join(IMF_ROOT_DIR, data_file_names[i].split('-')[0] + '.npy')
 
     for j in range(6):
         s = data[j]
         d = WaveletDenoising(s).out[r[0]: r[1]]
 
-        rec_d = plot_signal_decomp(t[r[0]: r[1]], d, 'coif5', data_file_names_cleared[i]+"_S{}".format(j), level=6)
+        rec_d = plot_signal_decomp(t[r[0]: r[1]], d, 'coif5', data_file_names[i]+"_S{}".format(j), level=6)
         # plt.show()
 
         # print("Please Choose the IMFs for S{}".format(j))
@@ -78,6 +77,8 @@ for i in range(n):
             imfs.append(rec_d[nt])
             imf += rec_d[nt]
         imfs.append(d - imf)
+
         IMFs['s{}'.format(j)] = imfs
+
     np.save(save_path, IMFs)
-    print("Done file {}".format(data_file_names[i]))
+    print("Done file {}".format(fn))

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from new.EDA import WaveletDenoising
 import numpy as np
 
-ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
+ROOT_DIR = "/Users/zcc/Documents/wield/data"
 
 
 def getData(file_path):
