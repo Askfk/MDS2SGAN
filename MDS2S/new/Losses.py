@@ -21,30 +21,30 @@ def imfs_loss(pred, gt):
 
     loss = mse_loss + upper / lower
 
-    return K.switch(tf.math.is_nan(loss), 0, loss)
+    return K.switch(tf.math.is_nan(loss), 0., loss)
 
 
 def poss_loss(pred, gt):
     loss_func = tf.keras.losses.CategoricalCrossentropy(from_logits=True)
     loss = K.mean(loss_func(gt, pred))
 
-    return K.switch(tf.math.is_nan(loss), 0, loss)
+    return K.switch(tf.math.is_nan(loss), 0., loss)
 
 
 def depth_loss(pred, gt):
     loss = K.mean(tf.keras.losses.MSE(gt, pred))
 
-    return K.switch(tf.math.is_nan(loss), 0, loss)
+    return K.switch(tf.math.is_nan(loss), 0., loss)
 
 
 def loc_loss(pred, gt):
     loss = K.mean(tf.keras.losses.MSE(gt, pred))
-    return K.switch(tf.math.is_nan(loss), 0, loss)
+    return K.switch(tf.math.is_nan(loss), 0., loss)
 
 
 def feats_loss(pred, gt):
     loss = K.mean(tf.keras.losses.MSE(gt, pred))
-    return K.switch(tf.math.is_nan(loss), 0, loss)
+    return K.switch(tf.math.is_nan(loss), 0., loss)
 
 
 if __name__ == '__main__':
