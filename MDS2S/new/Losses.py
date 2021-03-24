@@ -75,7 +75,7 @@ if __name__ == '__main__':
     for signals, input_tensor, gt_imfs, gt_loc, gt_damage_matrix, gt_depth in dataset.take(2):
 
         print("--------------------------Seperate Line---------------------------")
-        feats, imfs = g2(input_tensor)
+        feats, imfs = g(input_tensor)
         pm, dm, lm, pm_logits = d(feats)
 
         imfs_loss = Losses.imfs_loss(imfs, gt_imfs)
@@ -89,7 +89,7 @@ if __name__ == '__main__':
 
         loc_loss = Losses.loc_loss(lm, gt_loc)
         print("Localization loss : {}".format(loc_loss))
-        visualize_original_and_decomposed_modals(signals, gt_imfs * 100)
-        visualize_original_and_decomposed_modals(signals, imfs * 100)
+        visualize_original_and_decomposed_modals(signals, np.exp(gt_imfs) - cfg.SHIFT)
+        visualize_original_and_decomposed_modals(signals, np.exp(imfs) - cfg.SHIFT)
 
         plt.show()

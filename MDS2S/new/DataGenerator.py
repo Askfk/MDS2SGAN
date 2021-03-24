@@ -99,7 +99,7 @@ class DataGenerator(object):
             final = np.load(os.path.join(self.config.FINAL_ROOT_DIR, fn), allow_pickle=True)
             signals = final.item().get('signals')
             feats = final.item().get('feats')
-            imfs = final.item().get('imfs') / self.config.SCALE
+            imfs = np.log(final.item().get('imfs') + self.config.SHIFT)
             loc = final.item().get('loc')
             damage_matrix = final.item().get('damage_matrix')
             depth = final.item().get('depth')

@@ -25,7 +25,7 @@ class Config(object):
     TIME_RANGE = [700, 3500]  # total = 52 x 52 = 2704
     FREQ_RANGE = [2626, -29]  # total = 144
     SLICE_LENGTH = 144
-    SCALE = 1e2
+    SHIFT = 27e2
 
     # Wavelet TF params
     W_TF = "cgau8"

@@ -78,7 +78,7 @@ def visualize_original_and_decomposed_modals(multi, single, show_batch=1, figsiz
             ax[0, j].set_title("Original_{}".format(j + 1))
             # ax[0, j].set_ylim(ylim)
             for n in range(num_modals):
-                ds = decomposed_signals[n + j * num_modals, :].numpy()
+                ds = decomposed_signals[n + j * num_modals, :]
                 if denosing is not None:
                     ds = denosing(ds).out
                 sum_signal += ds
