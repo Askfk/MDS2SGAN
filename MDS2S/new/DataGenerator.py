@@ -6,7 +6,7 @@ import itertools
 import pywt
 import matplotlib.pyplot as plt
 
-from EDA import WaveletDenoising
+from .EDA import WaveletDenoising
 
 
 class DataGenerator(object):
@@ -99,10 +99,10 @@ class DataGenerator(object):
             final = np.load(os.path.join(self.config.FINAL_ROOT_DIR, fn), allow_pickle=True)
             signals = final.item().get('signals')
             feats = final.item().get('feats')
-            imfs = np.log(final.item().get('imfs') + self.config.SHIFT)
+            imfs = np.log(final.item().get('imfs') + self.config.SHIFT) / self.config.SCALE
             loc = final.item().get('loc')
             damage_matrix = final.item().get('damage_matrix')
-            depth = final.item().get('depth')
+            depth = final.item().get('depth') / 20
             depth = np.array(depth).reshape([1, ])
             data_pairs.append([signals, feats, imfs, loc, damage_matrix, depth])
         return data_pairs

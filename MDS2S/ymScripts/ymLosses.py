@@ -40,7 +40,7 @@ def categorical_focal_loss(gamma=2.0, alpha=0.25):
     return focal_loss
 
 
-def generator_loss_graph(predictions, ground_truth, amplifier=Config.AMPLIFIER, num_modals=Config.NUM_MODALS,
+def generator_loss_graph(predictions, ground_truth, amplifier=Config.AMPLIFIER, num_modals=3,
                          loss_func=tf.keras.losses.MSE):
     """As designed, the predictions should be the classification of the
     distractions.
@@ -100,7 +100,7 @@ def discriminator_localize_loss_graph(pred_localization, gt_localization, loss_f
 
     loss = K.mean(loss_func(gt_localization, pred_localization))
 
-    return K.switch(tf.math.is_nan(loss), 0, loss)
+    return K.switch(tf.math.is_nan(loss), 0., loss)
 
 
 def transformer_loss_graph(pred, gt,
