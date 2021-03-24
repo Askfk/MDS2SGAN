@@ -6,7 +6,7 @@ import itertools
 import pywt
 import matplotlib.pyplot as plt
 
-from new.EDA import WaveletDenoising
+from EDA import WaveletDenoising
 
 
 class DataGenerator(object):
