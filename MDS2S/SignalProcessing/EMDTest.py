@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 # from ..config import Config as cfg
 #
@@ -60,7 +59,7 @@ import seaborn as sns
 import scipy.io as scio
 import os
 from PyEMD import EMD, Visualisation
-from EDA import WaveletDenoising
+from new.EDA import WaveletDenoising
 
 ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
 

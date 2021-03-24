@@ -1,8 +1,7 @@
 import numpy as np
 import os
 import scipy.io as scio
-import matplotlib.pyplot as plt
-from EDA import WaveletDenoising
+from new.EDA import WaveletDenoising
 import pywt
 mode = pywt.Modes.smooth
 

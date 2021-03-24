@@ -5,7 +5,7 @@ import scipy.io as scio
 import itertools
 import pywt
 
-from EDA import WaveletDenoising
+from new.EDA import WaveletDenoising
 
 
 class DataGenerator(object):

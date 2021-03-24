@@ -2,10 +2,8 @@ import pywt
 import scipy.io as scio
 import os
 import matplotlib.pyplot as plt
-from EDA import WaveletDenoising
+from new.EDA import WaveletDenoising
 import numpy as np
-from TheRealEDA import FrequencyAnalysis, get_damage
-
 
 ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
 

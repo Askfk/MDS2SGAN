@@ -1,11 +1,9 @@
 import numpy as np
-import os
-import scipy.io as scio
 import matplotlib.pyplot as plt
 import pywt
 mode = pywt.Modes.smooth
 
-from EDA import WaveletDenoising
+from new.EDA import WaveletDenoising
 from TheRealEDA import FrequencyAnalysis, get_damage
 
 damage = get_damage()

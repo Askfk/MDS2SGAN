@@ -194,7 +194,7 @@ def autoVMD(data, alpha=500, tau=0., K=3, DC=0, init=1, tol=1e-7):
 if __name__ == '__main__':
     import scipy.io as scio
     import os
-    from EDA import WaveletDenoising
+    from new.EDA import WaveletDenoising
 
     ROOT_DIR = '/Users/liyiming/Desktop/研究生毕设/lamb wave dataset/wield/lym'
 
